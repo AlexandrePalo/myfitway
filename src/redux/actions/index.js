@@ -30,3 +30,18 @@ export const loginUser = (email, password) => {
       })
   }
 }
+
+export const searchTextChanged = (text) => ({
+  type: 'TEXT_SEARCH_CHANGED',
+  payload: text
+})
+
+export const distanceMinChanged = (distance) => ({
+  type: 'DISTANCE_MIN_CHANGED',
+  payload: distance
+})
+
+export const distanceMaxChanged = (distance) => ({
+  type: 'DISTANCE_MAX_CHANGED',
+  payload: distance
+})
