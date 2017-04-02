@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
 import { connect } from 'react-redux'
+import { Button, Item, Content, Input, Label, Container } from 'native-base'
 import { emailChanged, passwordChanged, loginUser } from '../redux/actions'
-import { Card, CardSection, Button, Input, Spinner } from './common'
+import { Spinner } from './common'
 
 class LoginForm extends Component {
 
@@ -16,41 +17,51 @@ class LoginForm extends Component {
       return <Spinner size="small" />
     }
     return (
-      <Button onPress={this.onButtonPress.bind(this)}>
-        Connexion
+      <Button onPress={this.onButtonPress.bind(this)} block success>
+        <Text>Connexion</Text>
       </Button>
     )
   }
 
   render() {
     return (
-      <View style={styles.containerStl}>
-        <Card>
-          <CardSection>
-            <Input
-              label="Email"
-              value={this.props.email}
-              onChangeText={email => this.props.emailChanged(email)}
-              placeholder="a.palo@gmail.com"
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              label="Mot de passe"
-              value={this.props.password}
-              onChangeText={password => this.props.passwordChanged(password)}
-              placeholder="password"
-              secureTextEntry
-            />
-          </CardSection>
-          <Text style={styles.errorTextStl}>
-            {this.props.error}
-          </Text>
-          <CardSection>
-            {this.renderButton()}
-          </CardSection>
-        </Card>
-      </View>
+      <Container style={{ paddingTop: 62 }}>
+        <Content>
+            <Item>
+              <Label>Email</Label>
+              <Input
+                label="Email"
+                value={this.props.email}
+                onChangeText={email => this.props.emailChanged(email)}
+                placeholder="a.palo@gmail.com"
+              />
+            </Item>
+            <Item>
+              <Label>Mot de passe</Label>
+              <Input
+                label="Mot de passe"
+                value={this.props.password}
+                onChangeText={password => this.props.passwordChanged(password)}
+                placeholder="password"
+                secureTextEntry
+              />
+            </Item>
+            {() => {
+              if (this.props.error) {
+                return (
+                  <Item>
+                    <Text style={styles.errorTextStl}>
+                      {this.props.error}
+                    </Text>
+                  </Item>
+                )
+              }
+            }}
+            <Item>
+              {this.renderButton()}
+            </Item>
+        </Content>
+      </Container>
     )
   }
 }

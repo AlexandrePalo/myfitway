@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "firebase": "^3.7.4",
+    "native-base": "^2.1.0",
     "react": "~15.4.1",
     "react-apollo": "^1.0.0",
     "react-native": "0.42.3",
