@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import { Button, Item, Content, Input, Label, Container } from 'native-base'
+import TextField from 'react-native-md-textinput'
 import { emailChanged, passwordChanged, loginUser } from '../redux/actions'
-import { Spinner } from './common'
+import { MCard } from './common/MCard'
+import { MButtonRaised } from './common/MButtonRaised'
 
 class LoginForm extends Component {
 
@@ -14,66 +15,63 @@ class LoginForm extends Component {
 
   renderButton() {
     if (this.props.loading) {
-      return <Spinner size="small" />
+      return (
+      <View style={styles.buttonWrapper}>
+        <MButtonRaised disabled loading onPress={this.onButtonPress.bind(this)} />
+      </View>
+      )
     }
     return (
-      <Button onPress={this.onButtonPress.bind(this)} block success>
-        <Text>Connexion</Text>
-      </Button>
+      <View style={styles.buttonWrapper}>
+        <MButtonRaised onPress={this.onButtonPress.bind(this)}>
+          <Text>Connexion</Text>
+        </MButtonRaised>
+      </View>
     )
   }
 
   render() {
     return (
-      <Container style={{ paddingTop: 62 }}>
-        <Content>
-            <Item>
-              <Label>Email</Label>
-              <Input
-                label="Email"
-                value={this.props.email}
-                onChangeText={email => this.props.emailChanged(email)}
-                placeholder="a.palo@gmail.com"
-              />
-            </Item>
-            <Item>
-              <Label>Mot de passe</Label>
-              <Input
-                label="Mot de passe"
-                value={this.props.password}
-                onChangeText={password => this.props.passwordChanged(password)}
-                placeholder="password"
-                secureTextEntry
-              />
-            </Item>
-            {() => {
-              if (this.props.error) {
-                return (
-                  <Item>
-                    <Text style={styles.errorTextStl}>
-                      {this.props.error}
-                    </Text>
-                  </Item>
-                )
-              }
-            }}
-            <Item>
-              {this.renderButton()}
-            </Item>
-        </Content>
-      </Container>
+      <View style={styles.containerStl}>
+        <MCard>
+          <Text style={styles.errorTextStl}>
+            {this.props.error}
+          </Text>
+          <TextField
+            inputStyle={{ height: 40, lineHeight: 40, marginTop: 0 }}
+            label="Email"
+            value={this.props.email}
+            onChangeText={email => this.props.emailChanged(email)}
+          />
+          <TextField
+            inputStyle={{ height: 40, lineHeight: 40 }}
+            label="Mot de passe"
+            value={this.props.password}
+            onChangeText={password => this.props.passwordChanged(password)}
+            secureTextEntry
+          />
+          {this.renderButton()}
+        </MCard>
+      </View>
     )
   }
 }
 
 const styles = {
   containerStl: {
-    paddingTop: 65
+    paddingTop: 65,
+    backgroundColor: '#f5f5f5',
+    flex: 1
   },
   errorTextStl: {
-    fontSize: 20,
+    marginTop: 10,
+    fontSize: 16,
     alignSelf: 'center',
     color: 'red'
+  },
+  buttonWrapper: {
+    marginTop: 30,
+    marginBottom: 10
   }
 }
 
