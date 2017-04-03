@@ -3,9 +3,9 @@ import { Text } from 'react-native'
 
 class ValueText extends Component {
   render() {
-    const { value, unit } = this.props
+    const { value, unit, style } = this.props
     return (
-      <Text>
+      <Text style={style}>
         {value} {unit}
       </Text>
     )

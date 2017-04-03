@@ -25,6 +25,7 @@ class SliderWithTwoValues extends Component {
             onChange={this.props.onChange}
           />
           <ValueText
+            style={styles.textStl}
             ref='valueText'
             value={this.concatValues()}
             unit={unit}
@@ -45,6 +46,9 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  textStl: {
+    fontSize: 12
   }
 }
 
