@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import TextField from 'react-native-md-textinput'
+import { Actions } from 'react-native-router-flux'
 import { MCard } from './common/MCard'
+import { MButtonRaised } from './common/MButtonRaised'
 import { SliderWithTwoValues } from './common/SliderWithTwoValues'
 import { CategorySelect } from './common/CategorySelect'
 import {
@@ -13,6 +15,10 @@ import {
 } from '../redux/actions'
 
 class TrackSearchForm extends Component {
+  onButtonPress() {
+    Actions.searchresults()
+  }
+
   render() {
     return (
       <View style={styles.containerStl}>
@@ -53,6 +59,11 @@ class TrackSearchForm extends Component {
             selected={this.props.category}
             onSelect={category => this.props.categoryChanged(category)}
           />
+          <View style={styles.buttonWrapper}>
+            <MButtonRaised onPress={this.onButtonPress.bind(this)}>
+              <Text>Rechercher</Text>
+            </MButtonRaised>
+          </View>
         </MCard>
       </View>
     )
@@ -65,6 +76,10 @@ const styles = {
     backgroundColor: '#f5f5f5',
     flex: 1
   },
+  buttonWrapper: {
+    marginTop: 30,
+    marginBottom: 10
+  }
 }
 
 const mapStateToProps = (state) => ({
