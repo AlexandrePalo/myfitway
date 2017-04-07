@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm'
 import TrackWelcome from './components/TrackWelcome'
 import TrackSearchForm from './components/TrackSearchForm'
 import TrackSearchResult from './components/TrackSearchResult'
+import tracerWelcome from './components/tracerWelcome'
 
 const RouterComponent = () => {
   return (
@@ -11,7 +12,7 @@ const RouterComponent = () => {
       <Scene key="auth">
         <Scene key="login" component={LoginForm} title="Authentification" />
       </Scene>
-      <Scene key="tracks" initial>
+      <Scene key="tracks">
         <Scene
           key="welcometrack"
           component={TrackWelcome}
@@ -26,6 +27,13 @@ const RouterComponent = () => {
           title="Résultats"
           rightTitle="Accueil"
           onRight={() => Actions.welcometrack()}
+        />
+      </Scene>
+      <Scene key="tracer" initial>
+        <Scene
+          key="welcome"
+          component={tracerWelcome}
+          title="Suivi GPS"
         />
       </Scene>
     </Router>

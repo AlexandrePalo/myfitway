@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 const TrackSection = (props) => {
   const { iconName, title, children } = props
   const { containerStl, titleContainerStl, iconStl, titleStl } = styles
-  console.log(iconName)
   return (
     <View style={containerStl}>
       <View style={titleContainerStl}>
