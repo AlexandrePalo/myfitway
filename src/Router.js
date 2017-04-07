@@ -1,7 +1,7 @@
 import React from 'react'
 import { Scene, Router, Actions } from 'react-native-router-flux'
 import LoginForm from './components/LoginForm'
-import WelcomeTrackList from './components/containers/WelcomeTrackList'
+import TrackWelcome from './components/TrackWelcome'
 import TrackSearchForm from './components/TrackSearchForm'
 import TrackSearchResult from './components/TrackSearchResult'
 
@@ -13,8 +13,8 @@ const RouterComponent = () => {
       </Scene>
       <Scene key="tracks" initial>
         <Scene
-          key="welcometracklist"
-          component={WelcomeTrackList}
+          key="welcometrack"
+          component={TrackWelcome}
           title="Parcours"
           rightTitle="Recherche"
           onRight={() => Actions.searchForm()}
@@ -25,7 +25,7 @@ const RouterComponent = () => {
           component={TrackSearchResult}
           title="Résultats"
           rightTitle="Accueil"
-          onRight={() => Actions.welcometracklist()}
+          onRight={() => Actions.welcometrack()}
         />
       </Scene>
     </Router>

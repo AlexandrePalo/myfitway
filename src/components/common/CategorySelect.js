@@ -48,6 +48,7 @@ const styles = {
 const categoriesQuery = gql`
   query categoriesQuery {
     categories {
+      id
       code
       name
     }
