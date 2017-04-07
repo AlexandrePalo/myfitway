@@ -9,10 +9,9 @@
   "dependencies": {
     "firebase": "^3.7.4",
     "mathjs": "^3.11.1",
-    "native-base": "^2.1.0",
-    "react": "~15.4.1",
+    "react": "^15.4.2",
     "react-apollo": "^1.0.0",
-    "react-native": "0.42.3",
+    "react-native": "^0.42.3",
     "react-native-chooser": "^1.5.0",
     "react-native-material-kit": "^0.4.1",
     "react-native-md-textinput": "^2.0.4",
