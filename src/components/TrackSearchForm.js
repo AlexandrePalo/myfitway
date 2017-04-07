@@ -16,7 +16,7 @@ import {
 
 class TrackSearchForm extends Component {
   onButtonPress() {
-    Actions.searchresults()
+    Actions.searchResults()
   }
 
   render() {

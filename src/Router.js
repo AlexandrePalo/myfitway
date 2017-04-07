@@ -9,19 +9,19 @@ const RouterComponent = () => {
   return (
     <Router>
       <Scene key="auth">
-        <Scene key="login" component={LoginForm} title="Authentification" initial/>
+        <Scene key="login" component={LoginForm} title="Authentification" />
       </Scene>
-      <Scene key="tracks">
+      <Scene key="tracks" initial>
         <Scene
           key="welcometracklist"
           component={WelcomeTrackList}
           title="Parcours"
           rightTitle="Recherche"
-          onRight={() => Actions.searchform()}
+          onRight={() => Actions.searchForm()}
         />
-        <Scene key="searchform" component={TrackSearchForm} title="Recherche" />
+        <Scene key="searchForm" component={TrackSearchForm} title="Recherche" />
         <Scene
-          key="searchresults"
+          key="searchResults"
           component={TrackSearchResult}
           title="Résultats"
           rightTitle="Accueil"
