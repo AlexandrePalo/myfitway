@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const TrackResult = (props) => {
   const { title, distance, place, date, description, done } = props
@@ -8,7 +9,7 @@ const TrackResult = (props) => {
   return (
     <View style={containerStl}>
       <View style={iconStl}>
-        <Text>DONE</Text>
+        <Icon name={done ? 'done' : 'file-download'} size={40} color="#000" />
       </View>
       <View style={trackStl}>
         <Text style={titleTextStl}>{title}</Text>
