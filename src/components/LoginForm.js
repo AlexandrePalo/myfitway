@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import TextField from 'react-native-md-textinput'
+import { Actions } from 'react-native-router-flux'
 import { emailChanged, passwordChanged, loginUser } from '../redux/actions'
 import { MCard } from './common/MCard'
-import { MButtonRaised } from './common/MButtonRaised'
+import { MButtonRaised, MButton } from './common'
 
 class LoginForm extends Component {
 
@@ -34,6 +35,9 @@ class LoginForm extends Component {
     return (
       <View style={styles.containerStl}>
         <MCard>
+          <Text style={styles.titleStl}>
+            MyFitWay
+          </Text>
           <Text style={styles.errorTextStl}>
             {this.props.error}
           </Text>
@@ -50,6 +54,20 @@ class LoginForm extends Component {
             onChangeText={password => this.props.passwordChanged(password)}
             secureTextEntry
           />
+          <View style={styles.signInResetWrapper}>
+            <MButton
+              onPress={() => Actions.resetPassword()}
+              textStyle={styles.resetBtnStl}
+            >
+              <Text>Mot de passe oublié ?</Text>
+            </MButton>
+            <MButton
+              onPress={() => Actions.signIn()}
+              textStyle={styles.signInBtnStl}
+            >
+              <Text>Pas encore membre ?</Text>
+            </MButton>
+          </View>
           {this.renderButton()}
         </MCard>
       </View>
@@ -63,14 +81,32 @@ const styles = {
     backgroundColor: '#f5f5f5',
     flex: 1
   },
+  titleStl: {
+    alignSelf: 'center',
+    fontSize: 30,
+    color: '#000',
+    opacity: 0.87
+  },
   errorTextStl: {
     marginTop: 10,
     fontSize: 16,
     alignSelf: 'center',
     color: 'red'
   },
-  buttonWrapper: {
+  signInResetWrapper: {
     marginTop: 30,
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  signInBtnStl: {
+    fontSize: 12
+  },
+  resetBtnStl: {
+    fontSize: 12
+  },
+  buttonWrapper: {
+    marginTop: 10,
     marginBottom: 10
   }
 }

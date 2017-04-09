@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { Spinner } from './index'
 
-class MButtonRaised extends Component {
+class MButton extends Component {
   renderText() {
-    const { loading, children } = this.props
-    const { textStyle } = styles
+    const { loading, children, textStyle } = this.props
+    const { baseTextStyle } = styles
     if (loading) {
       return <Spinner size="small" />
     }
-    return <Text style={textStyle}>{children}</Text>
+    return <Text style={Object.assign({}, baseTextStyle, textStyle)}>{children}</Text>
   }
 
   render() {
@@ -17,48 +17,38 @@ class MButtonRaised extends Component {
     const { onPress, disabled, buttonStyle } = this.props
     if (disabled) {
       return (
-      <View
+      <TouchableOpacity
         onPress={onPress}
         style={[buttonLoadingStyle, baseButtonStyle]}
       >
         {this.renderText()}
-      </View>
+      </TouchableOpacity>
       )
     }
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={onPress}
         style={Object.assign({}, baseButtonStyle, buttonStyle)}
-        underlayColor="#3f51b5"
       >
           {this.renderText()}
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 }
 
 const styles = {
-  textStyle: {
+  baseTextStyle: {
     alignSelf: 'center',
-    color: '#fff',
+    color: '#000',
     fontSize: 16,
     fontWeight: '600'
   },
   baseButtonStyle: {
-    backgroundColor: '#3949ab',
-    borderRadius: 2,
-    borderWidth: 1,
-    borderColor: '#3949ab',
-    padding: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    elevation: 3
+    padding: 5
   },
   buttonLoadingStyle: {
-    height: 35,
-    backgroundColor: '#3f51b5'
+    height: 35
   }
 }
 
-export { MButtonRaised }
+export { MButton }
