@@ -10,6 +10,7 @@ import TrackSearchForm from './components/TrackSearchForm'
 import TrackSearchResult from './components/TrackSearchResult'
 import tracerWelcome from './components/tracerWelcome'
 import NavigationDrawer from './components/NavigationDrawer'
+import { TBSideMenuButton } from './components/common'
 
 const RouterComponent = () => {
   return (
@@ -20,56 +21,46 @@ const RouterComponent = () => {
         <Scene key="resetPassword" component={ResetPasswordForm} title="Mot de passe oublié" />
       </Scene>
 
-
       <Scene key='drawer' component={NavigationDrawer} open={false} initial>
-
-        <Scene
-          key="main"
-          tabs
-        >
-
-
-        <Scene key="tracks">
-          <Scene
-            key="welcometrack"
-            component={TrackWelcome}
-            title="Parcours"
-            rightTitle="Recherche"
-            renderRightButton={() => (
-              <TouchableOpacity
-                onPress={() => {
-                  Actions.searchForm()
-                }}
-              >
-                <Icon
-                  name='search'
-                  size={24}
-                />
-              </TouchableOpacity>
-            )}
-          />
-          <Scene key="searchForm" component={TrackSearchForm} title="Recherche" />
-          <Scene
-            key="searchResults"
-            component={TrackSearchResult}
-            title="Résultats"
-            rightTitle="Accueil"
-            onRight={() => Actions.welcometrack()}
-          />
+        <Scene key="main">
+          <Scene key="tracks">
+            <Scene
+              key="welcometrack"
+              component={TrackWelcome}
+              title="Parcours"
+              rightTitle="Recherche"
+              renderRightButton={() => (
+                <TouchableOpacity
+                  onPress={() => {
+                    Actions.searchForm()
+                  }}
+                >
+                  <Icon
+                    name='search'
+                    size={24}
+                  />
+                </TouchableOpacity>
+              )}
+              renderLeftButton={() => <TBSideMenuButton />}
+            />
+            <Scene key="searchForm" component={TrackSearchForm} title="Recherche" />
+            <Scene
+              key="searchResults"
+              component={TrackSearchResult}
+              title="Résultats"
+              rightTitle="Accueil"
+              onRight={() => Actions.welcometrack()}
+            />
+          </Scene>
+          <Scene key="tracer">
+            <Scene
+              key="welcome"
+              component={tracerWelcome}
+              title="Suivi GPS"
+            />
+          </Scene>
         </Scene>
-        <Scene key="tracer">
-          <Scene
-            key="welcome"
-            component={tracerWelcome}
-            title="Suivi GPS"
-          />
-        </Scene>
-
       </Scene>
-
-
-      </Scene>
-
 
     </Router>
   )

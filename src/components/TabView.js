@@ -24,8 +24,8 @@ const TabView = (props, context) => {
   const drawer = context.drawer
   return (
     <View style={[styles.container, props.sceneStyle]}>
-      <MButtonRaised onPress={() => { drawer.close(); Actions.tracks() }}>Tracks</MButtonRaised>
-      <MButtonRaised onPress={() => { drawer.close(); Actions.tracer() }}>Tracer</MButtonRaised>
+      <MButtonRaised onPress={() => { Actions.tracks(); drawer.close() }}>Tracks</MButtonRaised>
+      <MButtonRaised onPress={() => { Actions.tracer(); drawer.close() }}>Tracer</MButtonRaised>
     </View>
   )
 }
