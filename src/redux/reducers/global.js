@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  category: null
+  category: 1
 }
 
 export default (state = INITIAL_STATE, action) => {

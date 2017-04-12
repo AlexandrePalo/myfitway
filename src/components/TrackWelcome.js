@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { gql, graphql } from 'react-apollo'
-import { Spinner, TrackWelcomeList } from './common'
+import { Spinner, TrackResult } from './common'
 
 class TrackWelcome extends Component {
   render() {
@@ -19,14 +20,44 @@ class TrackWelcome extends Component {
         tabBarTextStyle={tabBarTextStyle}
         tabBarBackgroundColor="#F5F5F5"
       >
-        { categories.map((category) => (
-          <TrackWelcomeList
-            tabLabel={category.name}
-            categoryId={category.id}
-            key={category.id}
-          />
-          )
-        )}
+        <View tabLabel="Nouveautés">
+          {categories[0].tracks.map((track) => {
+            return (
+              <TrackResult
+                key={track.id}
+                title={track.title}
+                distance={track.distance}
+                place={track.place}
+                date="03/2017"
+                description={
+                 (track.description.length > 40)
+                 ? (track.description.substring(0, 40) + '...')
+                 : track.description
+                }
+                done
+              />
+            )
+          })}
+        </View>
+        <View tabLabel="Populaires">
+          {categories[0].tracks.map((track) => {
+            return (
+              <TrackResult
+                key={track.id}
+                title={track.title}
+                distance={track.distance}
+                place={track.place}
+                date="03/2017"
+                description={
+                 (track.description.length > 40)
+                 ? (track.description.substring(0, 40) + '...')
+                 : track.description
+                }
+                done
+              />
+            )
+          })}
+        </View>
       </ScrollableTabView>
     )
   }
@@ -39,17 +70,33 @@ const styles = {
   }
 }
 
-const categoriesQuery = gql`
-  query categoriesQuery {
-    categories {
-      id
-      code
-      name
+const tracksQuery = gql`
+  query categoriesQuery($id: Int!) {
+    categories(id: $id) {
+      tracks {
+        id
+        title
+        distance
+        description
+        place
+      }
     }
   }
 `
 
+const mapStateToProps = (state) => {
+  return {
+    currentCategory: state.global.category
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   null
-)(graphql(categoriesQuery)(TrackWelcome))
+)(graphql(tracksQuery, {
+  options: (ownProps) => ({
+    variables: {
+      id: ownProps.currentCategory
+    }
+  })
+})(TrackWelcome))

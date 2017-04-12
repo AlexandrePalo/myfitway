@@ -1,7 +1,6 @@
-import React, { PropTypes } from 'react'
-import { Text, View } from 'react-native'
+import React, { PropTypes, Component } from 'react'
+import { Text, View, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { MButtonRaised } from './common'
 import { Link, Section, CurrentCategoryPicker } from './sideMenu'
 
 const contextTypes = {
@@ -14,33 +13,41 @@ const propTypes = {
   title: PropTypes.string,
 }
 
-const TabView = (props, context) => {
-  const drawer = context.drawer
-  return (
-    <View style={styles.containerStl}>
-      <View style={styles.headerContainerStl}>
-        <View style={styles.logoContainerStl}>
-          <Text>logo</Text>
-          <CurrentCategoryPicker />
+class TabView extends Component {
+  render() {
+    const drawer = this.context.drawer
+    return (
+      <View style={styles.containerStl}>
+        <View style={styles.headerContainerStl}>
+          <View style={styles.logoSubtitleContainerStl}>
+            <View style={styles.logoContainerStl}>
+              <Image source={require('../img/logo.png')} />
+            </View>
+            <View style={styles.subtitleContainerStl}>
+              <Text style={styles.subtitleTextStl}>MyFitWay</Text>
+            </View>
+          </View>
+          <View style={styles.pickerContainerStl}>
+            <Text style={styles.pickerTextStl}>Sport :</Text>
+            <View style={styles.pickerStl}>
+              <CurrentCategoryPicker />
+            </View>
+          </View>
         </View>
-        <View style={styles.subtitleContainerStl}>
-          <Text style={styles.subtitleTextStl}>subtitle</Text>
+
+        <View style={styles.menuContainerStl}>
+          <Section>
+            <Link title="Tracks" icon="swap-calls" to={() => Actions.tracks()} />
+            <Link title="Tracer" icon="layers" to={() => Actions.tracer()} />
+          </Section>
+          <Section>
+            <Link title="Paramètres" icon="settings" to={() => console.log('parameters')} />
+            <Link title="Déconnexion" icon="cancel" to={() => console.log('logout')} />
+          </Section>
         </View>
       </View>
-
-      <View style={styles.menuContainerStl}>
-        <Section>
-          <Link title="Tracks" icon="swap-calls" to={() => Actions.tracks()} />
-          <Link title="Tracer" icon="layers" to={() => Actions.tracer()} />
-        </Section>
-        <Section>
-          <Link title="Paramètres" icon="settings" to={() => console.log('parameters')} />
-          <Link title="Déconnexion" icon="cancel" to={() => console.log('logout')} />
-        </Section>
-      </View>
-
-</View>
-  )
+    )
+  }
 }
 
 const styles = {
@@ -49,17 +56,43 @@ const styles = {
     backgroundColor: '#F5FCFF'
   },
   headerContainerStl: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    borderBottomColor: '#757575',
+    borderBottomWidth: 1
+  },
+  logoSubtitleContainerStl: {
+    marginTop: 16,
+    marginLeft: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   logoContainerStl: {
-    height: 60,
   },
   subtitleContainerStl: {
-    height: 56,
+    alignSelf: 'center',
+    marginRight: 32
   },
   subtitleTextStl: {
+    fontSize: 22,
     color: '#000',
-    opacity: 0.54
+    opacity: 0.87,
+    alignSelf: 'center'
+  },
+  pickerContainerStl: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginLeft: 16,
+    marginRight: 16
+  },
+  pickerTextStl: {
+    color: '#000',
+    opacity: 0.87,
+    fontSize: 16,
+    flex: 1
+  },
+  pickerStl: {
+    flex: 1
   },
   menuContainerStl: {
     marginTop: 3

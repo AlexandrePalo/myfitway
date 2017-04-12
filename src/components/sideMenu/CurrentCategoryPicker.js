@@ -6,7 +6,6 @@ import { Spinner } from '../common'
 import { categoryChanged } from '../../redux/actions'
 
 const CurrentCategoryPickerUnlinked = (props) => {
-  console.log(props)
   if (props.data.loading) {
     return (
       <Spinner size="small" />
@@ -14,6 +13,7 @@ const CurrentCategoryPickerUnlinked = (props) => {
   }
   return (
     <Picker
+      mode="dropdown"
       selectedValue={props.currentCategory}
       onValueChange={(category) => props.categoryChanged(category)}
     >
