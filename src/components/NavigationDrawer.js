@@ -19,7 +19,7 @@ class NavigationDrawer extends React.Component {
         onClose={() => Actions.refresh({ key: state.key, open: false })}
         content={<TabView />}
         tapToClose
-        openDrawerOffset={0.4}
+        openDrawerOffset={0.2}
         panCloseMask={0.2}
         negotiatePan
         tweenHandler={(ratio) => ({

@@ -23,7 +23,7 @@ const RouterComponent = () => {
 
       <Scene key='drawer' component={NavigationDrawer} open={false} initial>
         <Scene key="main">
-          <Scene key="tracks">
+          <Scene key="tracks" renderLeftButton={() => <TBSideMenuButton />}>
             <Scene
               key="welcometrack"
               component={TrackWelcome}
@@ -57,6 +57,7 @@ const RouterComponent = () => {
               key="welcome"
               component={tracerWelcome}
               title="Suivi GPS"
+              renderLeftButton={() => <TBSideMenuButton />}
             />
           </Scene>
         </Scene>
