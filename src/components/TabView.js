@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { MButtonRaised } from './common'
-import { Link, Section } from './sideMenu'
+import { Link, Section, CurrentCategoryPicker } from './sideMenu'
 
 const contextTypes = {
   drawer: React.PropTypes.object,
@@ -21,6 +21,7 @@ const TabView = (props, context) => {
       <View style={styles.headerContainerStl}>
         <View style={styles.logoContainerStl}>
           <Text>logo</Text>
+          <CurrentCategoryPicker />
         </View>
         <View style={styles.subtitleContainerStl}>
           <Text style={styles.subtitleTextStl}>subtitle</Text>
@@ -48,8 +49,7 @@ const styles = {
     backgroundColor: '#F5FCFF'
   },
   headerContainerStl: {
-    flexDirection: 'column',
-    backgroundColor: 'red',
+    flexDirection: 'column'
   },
   logoContainerStl: {
     height: 60,

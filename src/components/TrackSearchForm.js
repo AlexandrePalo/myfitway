@@ -6,12 +6,10 @@ import { Actions } from 'react-native-router-flux'
 import { MCard } from './common/MCard'
 import { MButtonRaised } from './common/MButtonRaised'
 import { SliderWithTwoValues } from './common/SliderWithTwoValues'
-import { CategorySelect } from './common/CategorySelect'
 import {
   searchTextChanged,
   distanceMinChanged, distanceMaxChanged,
-  durationMinChanged, durationMaxChanged,
-  categoryChanged
+  durationMinChanged, durationMaxChanged
 } from '../redux/actions'
 
 class TrackSearchForm extends Component {
@@ -55,10 +53,6 @@ class TrackSearchForm extends Component {
               this.props.durationMaxChanged(val.max)
             }}
           />
-          <CategorySelect
-            selected={this.props.category}
-            onSelect={category => this.props.categoryChanged(category)}
-          />
           <View style={styles.buttonWrapper}>
             <MButtonRaised onPress={this.onButtonPress.bind(this)}>
               <Text>Rechercher</Text>
@@ -87,8 +81,7 @@ const mapStateToProps = (state) => ({
   distanceMin: state.trackSearch.distanceMin,
   distanceMax: state.trackSearch.distanceMax,
   durationMin: state.trackSearch.durationMin,
-  durationMax: state.trackSearch.durationMax,
-  category: state.trackSearch.category
+  durationMax: state.trackSearch.durationMax
 })
 
 export default connect(
@@ -97,6 +90,5 @@ export default connect(
     distanceMinChanged,
     distanceMaxChanged,
     durationMinChanged,
-    durationMaxChanged,
-    categoryChanged }
+    durationMaxChanged }
 )(TrackSearchForm)
