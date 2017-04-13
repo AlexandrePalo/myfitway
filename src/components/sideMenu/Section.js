@@ -13,9 +13,13 @@ const styles = {
   containerStl: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    marginTop: 2,
-    borderBottomColor: '#757575',
-    borderBottomWidth: 1
+    elevation: 1,
+    marginTop: 3,
+    position: 'relative',
+    backgroundColor: '#FAFAFA',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2
   }
 }
 

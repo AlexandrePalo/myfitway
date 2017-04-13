@@ -53,12 +53,16 @@ class TabView extends Component {
 const styles = {
   containerStl: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#FFFFFF'
   },
   headerContainerStl: {
     flexDirection: 'column',
-    borderBottomColor: '#757575',
-    borderBottomWidth: 1
+    elevation: 2,
+    position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    backgroundColor: '#E0E0E0',
   },
   logoSubtitleContainerStl: {
     marginTop: 16,
@@ -95,7 +99,8 @@ const styles = {
     flex: 1
   },
   menuContainerStl: {
-    marginTop: 3
+    backgroundColor: '#FAFAFA',
+    flex: 1
   }
 }
 
