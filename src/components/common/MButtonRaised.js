@@ -56,7 +56,7 @@ const styles = {
     elevation: 3
   },
   buttonLoadingStyle: {
-    height: 35,
+    height: 34,
     backgroundColor: '#3f51b5'
   }
 }

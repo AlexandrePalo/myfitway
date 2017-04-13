@@ -10,7 +10,7 @@ import TrackSearchForm from './components/TrackSearchForm'
 import TrackSearchResult from './components/TrackSearchResult'
 import tracerWelcome from './components/tracerWelcome'
 import NavigationDrawer from './components/NavigationDrawer'
-import { TBSideMenuButton } from './components/common'
+import { TBSideMenuButton, TBIconButton } from './components/common'
 
 const RouterComponent = () => {
   return (
@@ -49,7 +49,7 @@ const RouterComponent = () => {
               component={TrackSearchResult}
               title="Résultats"
               rightTitle="Accueil"
-              onRight={() => Actions.welcometrack()}
+              renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} /> }
             />
           </Scene>
           <Scene key="tracer">

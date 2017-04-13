@@ -90,13 +90,28 @@ export const createUser = (email, password) => {
           type: 'CREATE_USER_SUCCESS',
           payload: user
         })
-        Actions.login()
+        Actions.login({ type: 'reset' })
       })
       .catch(error => {
         dispatch({
           type: 'CREATE_USER_FAIL',
           payload: error
         })
+      })
+  }
+}
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    dispatch({ type: 'LOGOUT_USER_REQUEST' })
+
+    firebase.auth().signOut()
+      .then(() => {
+        dispatch({ type: 'LOGOUT_USER_SUCCESS' })
+        Actions.auth({ type: 'reset' })
+      })
+      .catch(error => {
+        dispatch({ type: 'LOGOUT_USER_FAIL' })
       })
   }
 }

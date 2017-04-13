@@ -1,6 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { Text, View, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
+import { logoutUser } from '../redux/actions'
+import { Spinner } from './common'
 import { Link, Section, CurrentCategoryPicker } from './sideMenu'
 
 const contextTypes = {
@@ -14,8 +17,18 @@ const propTypes = {
 }
 
 class TabView extends Component {
+  renderUserMail() {
+    const { user, loading } = this.props
+    if (loading === true) {
+      return <Spinner style={styles.subtitleEmailTextStl} size='small' />
+    }
+    if (user === null) {
+      return <Text style={styles.subtitleEmailTextStl} />
+    }
+    return <Text style={styles.subtitleEmailTextStl}>{user.email}</Text>
+  }
+
   render() {
-    const drawer = this.context.drawer
     return (
       <View style={styles.containerStl}>
         <View style={styles.headerContainerStl}>
@@ -25,6 +38,7 @@ class TabView extends Component {
             </View>
             <View style={styles.subtitleContainerStl}>
               <Text style={styles.subtitleTextStl}>MyFitWay</Text>
+              {this.renderUserMail()}
             </View>
           </View>
           <View style={styles.pickerContainerStl}>
@@ -37,12 +51,12 @@ class TabView extends Component {
 
         <View style={styles.menuContainerStl}>
           <Section>
-            <Link title="Tracks" icon="swap-calls" to={() => Actions.tracks()} />
-            <Link title="Tracer" icon="layers" to={() => Actions.tracer()} />
+            <Link title="Tracks" icon="swap-calls" onPress={() => Actions.tracks()} close />
+            <Link title="Tracer" icon="layers" onPress={() => Actions.tracer()} close />
           </Section>
           <Section>
-            <Link title="Paramètres" icon="settings" to={() => console.log('parameters')} />
-            <Link title="Déconnexion" icon="cancel" to={() => console.log('logout')} />
+            <Link title="Paramètres" icon="settings" onPress={() => console.log('parameters')} close />
+            <Link title="Déconnexion" icon="cancel" onPress={() => this.props.logoutUser()} />
           </Section>
         </View>
       </View>
@@ -74,12 +88,20 @@ const styles = {
   },
   subtitleContainerStl: {
     alignSelf: 'center',
-    marginRight: 32
+    marginRight: 32,
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   subtitleTextStl: {
     fontSize: 22,
     color: '#000',
     opacity: 0.87,
+    alignSelf: 'center'
+  },
+  subtitleEmailTextStl: {
+    fontSize: 14,
+    color: '#000',
+    opacity: 0.54,
     alignSelf: 'center'
   },
   pickerContainerStl: {
@@ -107,4 +129,12 @@ const styles = {
 TabView.contextTypes = contextTypes
 TabView.propTypes = propTypes
 
-export default TabView
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  loading: state.auth.loading
+})
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(TabView)

@@ -6,12 +6,17 @@ const contextTypes = {
   drawer: React.PropTypes.object,
 }
 
-const Link = ({ title, icon, to }, context) => {
+const Link = ({ title, icon, onPress, close }, context) => {
   const drawer = context.drawer
   return (
     <TouchableOpacity
       style={styles.containerStl}
-      onPress={() => { to(); drawer.close() }}
+      onPress={() => {
+        if (close) {
+          drawer.close()
+        }
+        onPress()
+      }}
     >
       <Icon name={icon} size={20} style={styles.iconStl} />
       <Text style={styles.titleStl}>{title}</Text>
