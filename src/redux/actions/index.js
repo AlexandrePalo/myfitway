@@ -21,7 +21,7 @@ export const loginUser = (email, password) => {
           type: 'LOGIN_USER_SUCCESS',
           payload: user
         })
-        Actions.tracks()
+        Actions.drawer()
       })
       .catch(error => {
         dispatch({
@@ -60,3 +60,43 @@ export const categoryChanged = (category) => ({
   type: 'CATEGORY_CHANGED',
   payload: category
 })
+
+export const emailSignInChanged = (email) => ({
+  type: 'EMAIL_SIGNIN_CHANGED',
+  payload: email
+})
+
+export const passwordSignInChanged = (password) => ({
+  type: 'PASSWORD_SIGNIN_CHANGED',
+  payload: password
+})
+
+export const passwordConfirmationSignInChanged = (password) => ({
+  type: 'PASSWORD_CONFIRMATION_SIGNIN_CHANGED',
+  payload: password
+})
+
+export const errorPasswordSignIn = () => ({
+  type: 'ERROR_PASSWORD_SIGNIN'
+})
+
+export const createUser = (email, password) => {
+  return (dispatch) => {
+    dispatch({ type: 'CREATE_USER_REQUEST' })
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        dispatch({
+          type: 'CREATE_USER_SUCCESS',
+          payload: user
+        })
+        Actions.login()
+      })
+      .catch(error => {
+        dispatch({
+          type: 'CREATE_USER_FAIL',
+          payload: error
+        })
+      })
+  }
+}

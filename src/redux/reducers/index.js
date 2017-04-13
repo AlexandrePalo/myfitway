@@ -3,6 +3,7 @@ import { ApolloClient, createNetworkInterface } from 'react-apollo'
 import authReducer from './auth'
 import trackSearchReducer from './trackSearch'
 import globalReducer from './global'
+import signInReducer from './signIn'
 
 export const client = new ApolloClient({
   networkInterface: createNetworkInterface({
@@ -14,5 +15,6 @@ export const mainReducer = combineReducers({
   auth: authReducer,
   global: globalReducer,
   trackSearch: trackSearchReducer,
+  signIn: signInReducer,
   apollo: client.reducer()
 })
