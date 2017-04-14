@@ -75,7 +75,7 @@ class SignInForm extends Component {
 
 const styles = {
   containerStl: {
-    paddingTop: 65,
+    paddingTop: 56,
     backgroundColor: '#f5f5f5',
     flex: 1
   },

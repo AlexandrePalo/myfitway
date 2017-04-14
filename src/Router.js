@@ -15,13 +15,13 @@ import { TBSideMenuButton, TBIconButton } from './components/common'
 const RouterComponent = () => {
   return (
     <Router>
-      <Scene key="auth" initial>
+      <Scene key="auth">
         <Scene key="login" component={LoginForm} title="Authentification" />
         <Scene key="signIn" component={SignInForm} title="Nouveau compte" />
         <Scene key="resetPassword" component={ResetPasswordForm} title="Mot de passe oublié" />
       </Scene>
 
-      <Scene key='drawer' component={NavigationDrawer} open={false}>
+      <Scene key='drawer' component={NavigationDrawer} open={false} initial>
         <Scene key="main">
           <Scene key="tracks" renderLeftButton={() => <TBSideMenuButton />}>
             <Scene

@@ -27,11 +27,14 @@ const TrackResult = (props) => {
 const styles = {
   containerStl: {
     height: 72,
+    backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginLeft: 10,
-    marginRight: 16
+    paddingLeft: 10,
+    paddingRight: 16,
+    marginTop: 1,
+    elevation: 1
   },
   iconStl: {
     opacity: 0.38
