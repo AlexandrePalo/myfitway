@@ -52,7 +52,7 @@ const RouterComponent = () => {
               renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} /> }
             />
           </Scene>
-          <Scene key="tracer">
+          <Scene key="tracer" initial>
             <Scene
               key="welcome"
               component={tracerWelcome}

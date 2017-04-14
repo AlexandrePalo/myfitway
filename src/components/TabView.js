@@ -52,7 +52,7 @@ class TabView extends Component {
         <View style={styles.menuContainerStl}>
           <Section>
             <Link title="Tracks" icon="swap-calls" onPress={() => Actions.tracks()} close />
-            <Link title="Tracer" icon="layers" onPress={() => Actions.tracer()} close />
+            <Link title="Tracer" icon="layers" onPress={() => Actions.tracer({ type: 'refresh' })} close />
           </Section>
           <Section>
             <Link title="Paramètres" icon="settings" onPress={() => console.log('parameters')} close />

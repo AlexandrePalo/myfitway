@@ -59,7 +59,10 @@ const tracerWelcome = () => {
 
 const styles = {
   containerStl: {
-    paddingTop: 55
+    paddingTop: 55,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    flex: 1
   },
   durationStl: {
     alignSelf: 'center'
