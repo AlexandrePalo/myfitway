@@ -30,7 +30,11 @@ class Map extends Component {
       (error) => console.log(JSON.stringify(error)),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     )
-    this.watchID = navigator.geolocation.watchPosition(position => this.positionWatcher(position))
+    this.watchID = navigator.geolocation.watchPosition(
+      position => this.positionWatcher(position),
+      (error) => console.log(JSON.stringify(error)),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 1 }
+    )
   }
 
   componentWillUnmount() {
