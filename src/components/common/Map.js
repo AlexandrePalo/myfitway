@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import MapView from 'react-native-maps'
+import {
+  addTrkptRecordingGeo
+} from '../../redux/actions'
 import { Spinner } from './index'
 
 const styles = {
@@ -17,10 +20,7 @@ class Map extends Component {
   state = {
     initialPosition: null,
     lastPosition: null,
-    trkpts: []
   }
-
-  watchID: ?number = null;
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -30,31 +30,30 @@ class Map extends Component {
       (error) => console.log(JSON.stringify(error)),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     )
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      this.setState({
-        lastPosition: position
-      })
-
-      if (this.props.recording) {
-        this.setState({
-          trkpts: [...this.state.trkpts, {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            elevation: position.coords.altitude,
-            key: position.coords.altitude + position.coords.longitude + position.timestamp
-          }]
-        })
-      }
-
-    })
+    this.watchID = navigator.geolocation.watchPosition(position => this.positionWatcher(position))
   }
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID)
   }
 
+  watchID: ?number = null;
+
+  positionWatcher(position) {
+    this.setState({
+      lastPosition: position
+    })
+    if (this.props.recording) {
+      this.props.addTrkptRecordingGeo({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        elevation: position.coords.altitude,
+      })
+    }
+  }
+
   render() {
-    const { lastPosition, initialPosition, trkpts } = this.state
+    const { lastPosition, initialPosition } = this.state
     let region = null
     if (lastPosition) {
       region = {
@@ -85,7 +84,7 @@ class Map extends Component {
           region={region}
         >
           <MapView.Polyline
-            coordinates={trkpts}
+            coordinates={this.props.trkpts}
             strokeWidth={2}
             strokeColor='red'
           />
@@ -99,10 +98,11 @@ class Map extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  recording: state.geolocation.recording
+  recording: state.geolocation.recording.recording,
+  trkpts: state.geolocation.recording.trkpts
 })
 
 export default connect(
   mapStateToProps,
-  null
+  { addTrkptRecordingGeo }
 )(Map)

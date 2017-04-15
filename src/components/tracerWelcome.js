@@ -3,7 +3,12 @@ import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { MCard, MButtonRaised } from './common'
-import { startRecording, stopRecording } from '../redux/actions'
+import { shortFrenchHumanizer } from '../tools'
+import {
+  startRecordingGeo,
+  stopRecordingGeo,
+  resetRecordingGeo
+} from '../redux/actions'
 import Map from './common/Map'
 
 class tracerWelcome extends Component {
@@ -11,15 +16,35 @@ class tracerWelcome extends Component {
     if (this.props.recording) {
       return (
         <MButtonRaised
-          onPress={this.props.stopRecording}
+          onPress={this.props.stopRecordingGeo}
         >
           Stop
         </MButtonRaised>
       )
     }
+    if (this.props.duration !== 0) {
+      return (
+        <View style={styles.buttonsWrapper}>
+          <View style={{ flex: 2, marginRight: 3 }}>
+            <MButtonRaised
+              onPress={this.props.startRecordingGeo}
+            >
+              Reprendre
+            </MButtonRaised>
+          </View>
+          <View style={{ flex: 2, marginLeft: 3 }}>
+            <MButtonRaised
+              onPress={this.props.resetRecordingGeo}
+            >
+              Terminer
+            </MButtonRaised>
+          </View>
+        </View>
+      )
+    }
     return (
       <MButtonRaised
-        onPress={this.props.startRecording}
+        onPress={this.props.startRecordingGeo}
       >
         Commencer
       </MButtonRaised>
@@ -41,6 +66,7 @@ class tracerWelcome extends Component {
       infoTextStl,
       infoIconStl
     } = styles
+
     return (
       <View style={{ flex: 1 }}>
         <View style={containerStl}>
@@ -49,14 +75,16 @@ class tracerWelcome extends Component {
         <View style={containerCardStl}>
           <MCard>
             <View style={durationStl}>
-              <Text style={durationTextStl}>12:31</Text>
+              <Text style={durationTextStl}>
+                {shortFrenchHumanizer(this.props.duration * 1000)}
+              </Text>
             </View>
             <View style={infoContainerStl}>
               <View style={distanceSpeedInfoContainerStl}>
                 <View style={distanceInfoContainerStl}>
                   <Icon name="all-inclusive" size={20} color="#000" style={infoIconStl} />
-                  <Text style={infoTextStl}>15</Text>
-                  <Text style={infoTextStl}>km</Text>
+                  <Text style={infoTextStl}>{Math.round(this.props.distance)}</Text>
+                  <Text style={infoTextStl}>m</Text>
                 </View>
                 <View style={speedInfoContainerStl}>
                   <Icon name="equalizer" size={20} color="#000" style={infoIconStl} />
@@ -67,12 +95,12 @@ class tracerWelcome extends Component {
               <View style={positivNegativStepInfoContainerStl}>
                 <View style={positivStepInfoContainerStl}>
                   <Icon name="trending-up" size={20} color="#000" style={infoIconStl} />
-                  <Text style={infoTextStl}>300</Text>
+                  <Text style={infoTextStl}>{Math.round(this.props.stepUp)}</Text>
                   <Text style={infoTextStl}>m</Text>
                 </View>
                 <View style={negativStepInfoContainerStl}>
                   <Icon name="trending-down" size={20} color="#000" style={infoIconStl} />
-                  <Text style={infoTextStl}>200</Text>
+                  <Text style={infoTextStl}>{Math.round(this.props.stepDown)}</Text>
                   <Text style={infoTextStl}>m</Text>
                 </View>
               </View>
@@ -139,14 +167,26 @@ const styles = {
     color: '#000',
     opacity: 0.54,
     marginTop: 4
+  },
+  buttonsWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 }
 
-const mapStateToProps = (state) => ({
-  recording: state.geolocation.recording
-})
+const mapStateToProps = (state) => {
+  const { recording, distance, duration, stepUp, stepDown } = state.geolocation.recording
+  return {
+    recording,
+    distance,
+    duration,
+    stepUp,
+    stepDown
+  }
+}
 
 export default connect(
   mapStateToProps,
-  { startRecording, stopRecording }
+  { startRecordingGeo, stopRecordingGeo, resetRecordingGeo }
 )(tracerWelcome)

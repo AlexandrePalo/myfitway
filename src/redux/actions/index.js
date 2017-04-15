@@ -116,10 +116,36 @@ export const logoutUser = () => {
   }
 }
 
-export const startRecording = () => ({
-  type: 'START_RECORDING'
+export const startRecordingGeo = () => {
+  return (dispatch) => {
+    let timer = null
+    clearInterval(timer)
+    timer = setInterval(() => dispatch({ type: 'ADD_1_SEC_TIMER_RECORDING_GEO' }), 1000)
+    dispatch({
+      type: 'START_RECORDING_GEO',
+      payload: timer
+    })
+  }
+}
+
+export const stopRecordingGeo = () => ({
+  type: 'STOP_RECORDING_GEO'
 })
 
-export const stopRecording = () => ({
-  type: 'STOP_RECORDING'
+export const resetRecordingGeo = () => ({
+  type: 'RESET_RECORDING_GEO'
+})
+
+export const addOneSecTimerRecordingGeo = () => ({
+  type: 'ADD_1_SEC_TIMER_RECORDING_GEO'
+})
+
+export const addTrkptRecordingGeo = (trkpt) => ({
+  type: 'ADD_TRKPT_RECORDING_GEO',
+  payload: trkpt
+})
+
+export const setNameRecordingGeo = (name) => ({
+  type: 'SET_NAME_RECORDING_GEO',
+  payload: name
 })
