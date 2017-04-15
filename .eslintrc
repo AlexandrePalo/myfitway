@@ -1,6 +1,7 @@
 {
   "extends": "rallycoding",
   "rules": {
-      "semi": ["error", "never"]
+      "semi": ["error", "never"],
+      "prefer-template": 0,
     }
 }

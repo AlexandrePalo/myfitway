@@ -4,6 +4,7 @@ import authReducer from './auth'
 import trackSearchReducer from './trackSearch'
 import globalReducer from './global'
 import signInReducer from './signIn'
+import geolocationReducer from './geolocation'
 
 export const client = new ApolloClient({
   networkInterface: createNetworkInterface({
@@ -16,5 +17,6 @@ export const mainReducer = combineReducers({
   global: globalReducer,
   trackSearch: trackSearchReducer,
   signIn: signInReducer,
+  geolocation: geolocationReducer,
   apollo: client.reducer()
 })

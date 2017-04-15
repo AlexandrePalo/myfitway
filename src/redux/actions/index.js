@@ -115,3 +115,11 @@ export const logoutUser = () => {
       })
   }
 }
+
+export const startRecording = () => ({
+  type: 'START_RECORDING'
+})
+
+export const stopRecording = () => ({
+  type: 'STOP_RECORDING'
+})
