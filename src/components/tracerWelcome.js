@@ -19,7 +19,7 @@ class tracerWelcome extends Component {
     }
     return (
       <MButtonRaised
-        onPress={() => console.log("hello")}
+        onPress={this.props.startRecording}
       >
         Commencer
       </MButtonRaised>
@@ -42,42 +42,44 @@ class tracerWelcome extends Component {
       infoIconStl
     } = styles
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <View style={containerStl}>
           <Map />
         </View>
-        <MCard style={containerCardStl}>
-          <View style={durationStl}>
-            <Text style={durationTextStl}>12:31</Text>
-          </View>
-          <View style={infoContainerStl}>
-            <View style={distanceSpeedInfoContainerStl}>
-              <View style={distanceInfoContainerStl}>
-                <Icon name="all-inclusive" size={20} color="#000" style={infoIconStl} />
-                <Text style={infoTextStl}>15</Text>
-                <Text style={infoTextStl}>km</Text>
+        <View style={containerCardStl}>
+          <MCard>
+            <View style={durationStl}>
+              <Text style={durationTextStl}>12:31</Text>
+            </View>
+            <View style={infoContainerStl}>
+              <View style={distanceSpeedInfoContainerStl}>
+                <View style={distanceInfoContainerStl}>
+                  <Icon name="all-inclusive" size={20} color="#000" style={infoIconStl} />
+                  <Text style={infoTextStl}>15</Text>
+                  <Text style={infoTextStl}>km</Text>
+                </View>
+                <View style={speedInfoContainerStl}>
+                  <Icon name="equalizer" size={20} color="#000" style={infoIconStl} />
+                  <Text style={infoTextStl}>20</Text>
+                  <Text style={infoTextStl}>km/h</Text>
+                </View>
               </View>
-              <View style={speedInfoContainerStl}>
-                <Icon name="equalizer" size={20} color="#000" style={infoIconStl} />
-                <Text style={infoTextStl}>20</Text>
-                <Text style={infoTextStl}>km/h</Text>
+              <View style={positivNegativStepInfoContainerStl}>
+                <View style={positivStepInfoContainerStl}>
+                  <Icon name="trending-up" size={20} color="#000" style={infoIconStl} />
+                  <Text style={infoTextStl}>300</Text>
+                  <Text style={infoTextStl}>m</Text>
+                </View>
+                <View style={negativStepInfoContainerStl}>
+                  <Icon name="trending-down" size={20} color="#000" style={infoIconStl} />
+                  <Text style={infoTextStl}>200</Text>
+                  <Text style={infoTextStl}>m</Text>
+                </View>
               </View>
             </View>
-            <View style={positivNegativStepInfoContainerStl}>
-              <View style={positivStepInfoContainerStl}>
-                <Icon name="trending-up" size={20} color="#000" style={infoIconStl} />
-                <Text style={infoTextStl}>300</Text>
-                <Text style={infoTextStl}>m</Text>
-              </View>
-              <View style={negativStepInfoContainerStl}>
-                <Icon name="trending-down" size={20} color="#000" style={infoIconStl} />
-                <Text style={infoTextStl}>200</Text>
-                <Text style={infoTextStl}>m</Text>
-              </View>
-            </View>
-          </View>
-          {this.renderButton()}
-        </MCard>
+            {this.renderButton()}
+          </MCard>
+        </View>
       </View>
     )
   }
@@ -92,7 +94,9 @@ const styles = {
   },
   containerCardStl: {
     position: 'absolute',
-    top: 100
+    top: 55,
+    left: 16,
+    right: 16
   },
   durationStl: {
     alignSelf: 'center'
@@ -122,12 +126,12 @@ const styles = {
   durationTextStl: {
     color: '#000',
     opacity: 0.87,
-    fontSize: 30
+    fontSize: 20
   },
   infoTextStl: {
     color: '#000',
     opacity: 0.54,
-    fontSize: 20,
+    fontSize: 14,
     marginLeft: 10,
     marginBottom: 16
   },
