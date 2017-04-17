@@ -17,16 +17,15 @@ class TrackDetails extends Component {
     positivStepInfoContainerStl, negativStepInfoContainerStl, simpleContainerStl } = styles
 
     const dataset = [chartDatasetAltDis(this.props.trkpts)]
-    console.log(Dimensions.get('window').width)
     const options = {
-      height: 250,
-      width: Dimensions.get('window').width - 32,
+      height: 150,
+      width: 280,
       color: '#2980B9',
       margin: {
-        top: 10,
-        left: 35,
-        bottom: 30,
-        right: 10
+        top: 30,
+        left: 45,
+        bottom: 20,
+        right: 20
       },
       animate: {
         type: 'delayed',
@@ -65,7 +64,7 @@ class TrackDetails extends Component {
     }
 
     return (
-      <View>
+      <View style={{ justifyContent: 'center' }}>
         <MCard>
           <View style={infoContainerStl}>
             <View style={distanceDurationInfoContainerStl}>
@@ -93,9 +92,7 @@ class TrackDetails extends Component {
             </View>
           </View>
         </MCard>
-        <View style={simpleContainerStl}>
-          <SmoothLine data={dataset} options={options} xKey='x' yKey='y' />
-        </View>
+        <SmoothLine data={dataset} options={options} xKey='x' yKey='y' />
         <View style={simpleContainerStl}>
           <DisplayTrackMap trkpts={this.props.trkpts} />
         </View>

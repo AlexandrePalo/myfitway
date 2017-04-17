@@ -125,7 +125,7 @@ class TracerWelcome extends Component {
 
 const styles = {
   containerStl: {
-    paddingTop: 55,
+    paddingTop: 54,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     flex: 1

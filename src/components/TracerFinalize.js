@@ -17,7 +17,7 @@ class TracerFinalize extends Component {
   render() {
     const { trkpts, stepDown, stepUp } = this.props
     return (
-      <ScrollView style={{ marginTop: 50 }}>
+      <ScrollView style={{ marginTop: 50, paddingBottom: 5 }}>
         <TrackDetails
           trkpts={trkpts}
           duration={duration(trkpts)}
@@ -78,6 +78,7 @@ class TracerFinalize extends Component {
 
 const styles = {
   cancelSaveWrapper: {
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-around'
   }

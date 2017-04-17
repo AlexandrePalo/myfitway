@@ -53,7 +53,6 @@ const RouterComponent = () => {
               rightTitle="Accueil"
               renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} /> }
             />
-            <Scene key="details" component={TrackDetails} title="Détails" />
           </Scene>
           <Scene key="tracer" initial>
             <Scene
@@ -63,7 +62,12 @@ const RouterComponent = () => {
               renderLeftButton={() => <TBSideMenuButton />}
             />
           </Scene>
-          <Scene key="finalize" component={TracerFinalize} title="Finalisation" />
+          <Scene
+            key="finalize"
+            component={TracerFinalize}
+            title="Finalisation"
+            renderLeftButton={() => <TBSideMenuButton />}
+          />
         </Scene>
       </Scene>
 

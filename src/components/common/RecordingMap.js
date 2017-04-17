@@ -83,7 +83,7 @@ class RecordingMapUnlinked extends Component {
           region={region}
           //customMapStyle={customMapStyle}
           showsUserLocation
-          showsMyLocationButton
+          showsMyLocationButton={false}
         >
           <MapView.Polyline
             style={{ zIndex: 5 }}
