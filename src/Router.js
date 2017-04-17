@@ -8,8 +8,10 @@ import ResetPasswordForm from './components/ResetPasswordForm'
 import TrackWelcome from './components/TrackWelcome'
 import TrackSearchForm from './components/TrackSearchForm'
 import TrackSearchResult from './components/TrackSearchResult'
-import tracerWelcome from './components/tracerWelcome'
+import TracerWelcome from './components/TracerWelcome'
 import NavigationDrawer from './components/NavigationDrawer'
+import TrackDetails from './components/TrackDetails'
+import TracerFinalize from './components/TracerFinalize'
 import { TBSideMenuButton, TBIconButton } from './components/common'
 
 const RouterComponent = () => {
@@ -23,7 +25,7 @@ const RouterComponent = () => {
 
       <Scene key='drawer' component={NavigationDrawer} open={false} initial>
         <Scene key="main">
-          <Scene key="tracks" renderLeftButton={() => <TBSideMenuButton />}>
+          <Scene key="tracks" renderLeftButton={() => <TBSideMenuButton />} >
             <Scene
               key="welcometrack"
               component={TrackWelcome}
@@ -51,15 +53,17 @@ const RouterComponent = () => {
               rightTitle="Accueil"
               renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} /> }
             />
+            <Scene key="details" component={TrackDetails} title="Détails" />
           </Scene>
           <Scene key="tracer" initial>
             <Scene
               key="welcome"
-              component={tracerWelcome}
+              component={TracerWelcome}
               title="Suivi GPS"
               renderLeftButton={() => <TBSideMenuButton />}
             />
           </Scene>
+          <Scene key="finalize" component={TracerFinalize} title="Finalisation" />
         </Scene>
       </Scene>
 

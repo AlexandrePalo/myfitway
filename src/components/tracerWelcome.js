@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { MCard, MButtonRaised } from './common'
-import { shortFrenchHumanizer } from '../tools'
+import { Actions } from 'react-native-router-flux'
+import _ from 'lodash'
+import { MCard, MButtonRaised, RecordingMap } from './common'
 import {
   startRecordingGeo,
   stopRecordingGeo,
   resetRecordingGeo
 } from '../redux/actions'
-import Map from './common/Map'
 
-class tracerWelcome extends Component {
+class TracerWelcome extends Component {
   renderButton() {
     if (this.props.recording) {
       return (
@@ -22,7 +22,7 @@ class tracerWelcome extends Component {
         </MButtonRaised>
       )
     }
-    if (this.props.duration !== 0) {
+    if (this.props.trkpts.length !== 0) {
       return (
         <View style={styles.buttonsWrapper}>
           <View style={{ flex: 2, marginRight: 3 }}>
@@ -34,7 +34,11 @@ class tracerWelcome extends Component {
           </View>
           <View style={{ flex: 2, marginLeft: 3 }}>
             <MButtonRaised
-              onPress={this.props.resetRecordingGeo}
+              onPress={() => {
+                this.props.stopRecordingGeo()
+                Actions.finalize({ type: 'reset' })
+              }
+            }
             >
               Terminer
             </MButtonRaised>
@@ -67,40 +71,46 @@ class tracerWelcome extends Component {
       infoIconStl
     } = styles
 
+    const { trkpts, stepUp, stepDown } = this.props
+
     return (
       <View style={{ flex: 1 }}>
         <View style={containerStl}>
-          <Map />
+          <RecordingMap />
         </View>
         <View style={containerCardStl}>
           <MCard>
             <View style={durationStl}>
               <Text style={durationTextStl}>
-                {shortFrenchHumanizer(this.props.duration * 1000)}
+                0:0
               </Text>
             </View>
             <View style={infoContainerStl}>
               <View style={distanceSpeedInfoContainerStl}>
                 <View style={distanceInfoContainerStl}>
                   <Icon name="all-inclusive" size={20} color="#000" style={infoIconStl} />
-                  <Text style={infoTextStl}>{Math.round(this.props.distance)}</Text>
+                  <Text style={infoTextStl}>{
+                    (trkpts.length > 0) ? Math.round(_.last(trkpts).distance) : 0
+                  }</Text>
                   <Text style={infoTextStl}>m</Text>
                 </View>
                 <View style={speedInfoContainerStl}>
                   <Icon name="equalizer" size={20} color="#000" style={infoIconStl} />
-                  <Text style={infoTextStl}>20</Text>
+                  <Text style={infoTextStl}>{
+                    (trkpts.length > 0) ? Math.round(_.last(trkpts).instantSpeed) : 0
+                  }</Text>
                   <Text style={infoTextStl}>km/h</Text>
                 </View>
               </View>
               <View style={positivNegativStepInfoContainerStl}>
                 <View style={positivStepInfoContainerStl}>
                   <Icon name="trending-up" size={20} color="#000" style={infoIconStl} />
-                  <Text style={infoTextStl}>{Math.round(this.props.stepUp)}</Text>
+                  <Text style={infoTextStl}>{Math.round(stepUp)}</Text>
                   <Text style={infoTextStl}>m</Text>
                 </View>
                 <View style={negativStepInfoContainerStl}>
                   <Icon name="trending-down" size={20} color="#000" style={infoIconStl} />
-                  <Text style={infoTextStl}>{Math.round(this.props.stepDown)}</Text>
+                  <Text style={infoTextStl}>{Math.round(stepDown)}</Text>
                   <Text style={infoTextStl}>m</Text>
                 </View>
               </View>
@@ -176,11 +186,10 @@ const styles = {
 }
 
 const mapStateToProps = (state) => {
-  const { recording, distance, duration, stepUp, stepDown } = state.geolocation.recording
+  const { recording, trkpts, stepUp, stepDown } = state.geolocation.recording
   return {
     recording,
-    distance,
-    duration,
+    trkpts,
     stepUp,
     stepDown
   }
@@ -189,4 +198,4 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   { startRecordingGeo, stopRecordingGeo, resetRecordingGeo }
-)(tracerWelcome)
+)(TracerWelcome)

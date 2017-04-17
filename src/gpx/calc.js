@@ -1,4 +1,4 @@
-import math from 'mathjs'
+import moment from 'moment'
 
 const degToRad = (d) => {
   return (d * Math.PI / 180)
@@ -22,13 +22,16 @@ const distance2Coords = (a, b) => {
 }
 
 const step2Coords = (a, b) => {
-  console.log(a.elevation)
-  console.log(b.elevation)
-  console.log(Math.abs(a.elevation - b.elevation))
   return {
     value: Math.abs(a.elevation - b.elevation),
     up: ((b.elevation - a.elevation) >= 0)
   }
 }
 
-export { distance2Coords, step2Coords }
+const instantSpeed2Coords = (a, b) => {
+  const ms = (b.distance - a.distance) * 1000 / (b.timestamp - a.timestamp)
+  const kmh = ms * 3600 / 1000
+  return kmh
+}
+
+export { distance2Coords, step2Coords, instantSpeed2Coords }
