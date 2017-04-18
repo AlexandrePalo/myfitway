@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import { logoutUser } from '../redux/actions'
 import { Spinner } from './common'
-import { Link, Section, CurrentCategoryPicker } from './sideMenu'
+import { Link, Section } from './sideMenu'
 
 const contextTypes = {
   drawer: React.PropTypes.object,

@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { SmoothLine } from 'react-native-pathjs-charts'
 import { chartDatasetAltDis } from '../gpx'
 import { shortFrenchHumanizer } from '../tools'
-import { MCard, DisplayTrackMap } from './common'
+import { DisplayTrackMap } from './common'
+import { Card } from './sober'
 
 class TrackDetails extends Component {
   state = {
@@ -65,7 +66,7 @@ class TrackDetails extends Component {
 
     return (
       <View style={{ justifyContent: 'center' }}>
-        <MCard>
+        <Card>
           <View style={infoContainerStl}>
             <View style={distanceDurationInfoContainerStl}>
               <View style={distanceInfoContainerStl}>
@@ -91,7 +92,7 @@ class TrackDetails extends Component {
               </View>
             </View>
           </View>
-        </MCard>
+        </Card>
         <SmoothLine data={dataset} options={options} xKey='x' yKey='y' />
         <View style={simpleContainerStl}>
           <DisplayTrackMap trkpts={this.props.trkpts} />

@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 
-const MCard = ({ children }) => {
+const Card = ({ children }) => {
   const { containerStl } = styles
   return (
     <View style={containerStl}>
@@ -27,4 +27,4 @@ const styles = {
   }
 }
 
-export { MCard }
+export { Card }

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-const CardLinkIcon = (props) => {
+const LinkIcon = (props) => {
   const { icon, text, set, onPress, last } = props
   const styles = {
     containerStl: {
@@ -43,6 +43,4 @@ const CardLinkIcon = (props) => {
   )
 }
 
-
-
-export { CardLinkIcon }
+export { LinkIcon }

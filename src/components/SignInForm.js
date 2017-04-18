@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import TextField from 'react-native-md-textinput'
 import { connect } from 'react-redux'
-import { MCard, MButtonRaised } from './common'
+import { MButtonRaised } from './common'
+import { Card } from './sober'
 import {
   emailSignInChanged,
   passwordSignInChanged,
@@ -42,7 +43,7 @@ class SignInForm extends Component {
   render() {
     return (
       <View style={styles.containerStl}>
-        <MCard>
+        <Card>
           <Text style={styles.errorTextStl}>
             {this.props.error}
           </Text>
@@ -67,7 +68,7 @@ class SignInForm extends Component {
             secureTextEntry
           />
           {this.renderButton()}
-        </MCard>
+        </Card>
       </View>
     )
   }

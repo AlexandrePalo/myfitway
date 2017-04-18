@@ -4,7 +4,8 @@ import { View, ScrollView, Modal } from 'react-native'
 import TextField from 'react-native-md-textinput'
 import _ from 'lodash'
 import TrackDetails from './TrackDetails'
-import { MCard, MButtonRaised, MButton, ModalViewYesNo } from './common'
+import { MButtonRaised, MButton, ModalViewYesNo } from './common'
+import { Card } from './sober'
 import { setTitleRecordingGeo, setDescriptionRecordingGeo } from '../redux/actions'
 import { duration } from '../gpx'
 
@@ -25,7 +26,7 @@ class TracerFinalize extends Component {
           stepUp={stepUp}
           stepDown={stepDown}
         />
-        <MCard>
+        <Card>
           <TextField
             wrapperStyle={{ marginTop: -10 }}
             inputStyle={{ height: 40, lineHeight: 40, marginTop: 0 }}
@@ -55,7 +56,7 @@ class TracerFinalize extends Component {
               Enregistrer
             </MButtonRaised>
           </View>
-        </MCard>
+        </Card>
 
 
         <Modal

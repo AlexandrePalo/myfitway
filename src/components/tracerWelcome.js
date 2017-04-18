@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Actions } from 'react-native-router-flux'
 import _ from 'lodash'
-import { MCard, MButtonRaised, RecordingMap } from './common'
+import { MButtonRaised, RecordingMap } from './common'
+import { Card } from './sober'
 import {
   startRecordingGeo,
   stopRecordingGeo,
@@ -79,7 +80,7 @@ class TracerWelcome extends Component {
           <RecordingMap />
         </View>
         <View style={containerCardStl}>
-          <MCard>
+          <Card>
             <View style={durationStl}>
               <Text style={durationTextStl}>
                 0:0
@@ -116,7 +117,7 @@ class TracerWelcome extends Component {
               </View>
             </View>
             {this.renderButton()}
-          </MCard>
+          </Card>
         </View>
       </View>
     )

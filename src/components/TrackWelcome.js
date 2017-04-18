@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
-import { ScrollView } from 'react-native'
-import { connect } from 'react-redux'
-import { gql, graphql } from 'react-apollo'
-import { Spinner, TrackWelcomeNewTracks, TrackWelcomeFamousTracks } from './common'
+import { TrackWelcomeNewTracks, TrackWelcomeFamousTracks } from './common'
 
 class TrackWelcome extends Component {
   render() {

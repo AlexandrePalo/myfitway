@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TextInput } from 'react-native'
 
-const CardInput = (props) => {
+const Input = (props) => {
   const { placeholder, onChangeText, last } = props
   const styles = {
     containerStl: {
@@ -31,4 +31,4 @@ const CardInput = (props) => {
   )
 }
 
-export { CardInput }
+export { Input }

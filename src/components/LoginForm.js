@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import TextField from 'react-native-md-textinput'
 import { Actions } from 'react-native-router-flux'
 import { emailChanged, passwordChanged, loginUser } from '../redux/actions'
-import { MCard } from './common/MCard'
+import { Card } from './sober'
 import { MButtonRaised, MButton } from './common'
 
 class LoginForm extends Component {
@@ -34,7 +34,7 @@ class LoginForm extends Component {
   render() {
     return (
       <View style={styles.containerStl}>
-        <MCard>
+        <Card>
           <Text style={styles.titleStl}>
             MyFitWay
           </Text>
@@ -69,7 +69,7 @@ class LoginForm extends Component {
             </MButton>
           </View>
           {this.renderButton()}
-        </MCard>
+        </Card>
       </View>
     )
   }

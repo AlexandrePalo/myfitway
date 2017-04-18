@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import TextField from 'react-native-md-textinput'
 import { Actions } from 'react-native-router-flux'
-import { MCard } from './common/MCard'
+import { Card } from './sober'
 import { MButtonRaised } from './common/MButtonRaised'
 import { SliderWithTwoValues } from './common/SliderWithTwoValues'
 import {
@@ -20,7 +20,7 @@ class TrackSearchForm extends Component {
   render() {
     return (
       <View style={styles.containerStl}>
-        <MCard>
+        <Card>
           <TextField
             inputStyle={{ height: 40, lineHeight: 40, marginTop: 0 }}
             label="Recherche"
@@ -58,7 +58,7 @@ class TrackSearchForm extends Component {
               <Text>Rechercher</Text>
             </MButtonRaised>
           </View>
-        </MCard>
+        </Card>
       </View>
     )
   }
