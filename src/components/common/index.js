@@ -16,3 +16,5 @@ export * from './TBIconButton'
 export * from './ModalViewYesNo'
 export * from './RecordingMap'
 export * from './DisplayTrackMap'
+
+export * from './CardLinkIcon'

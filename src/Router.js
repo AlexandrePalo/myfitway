@@ -9,6 +9,7 @@ import TrackWelcome from './components/TrackWelcome'
 import TrackSearchForm from './components/TrackSearchForm'
 import TrackSearchResult from './components/TrackSearchResult'
 import TracerWelcome from './components/TracerWelcome'
+import RecordingSettings from './components/RecordingSettings'
 import NavigationDrawer from './components/NavigationDrawer'
 import TrackDetails from './components/TrackDetails'
 import TracerFinalize from './components/TracerFinalize'
@@ -60,6 +61,13 @@ const RouterComponent = () => {
               component={TracerWelcome}
               title="Suivi GPS"
               renderLeftButton={() => <TBSideMenuButton />}
+              renderRightButton={() => <TBIconButton icon='directions-bike' onPress={() => Actions.recordingSettings()} />}
+            />
+            <Scene
+              initial
+              key="recordingSettings"
+              component={RecordingSettings}
+              title="Réglages de l'enregistrement"
             />
           </Scene>
           <Scene
