@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import TextField from 'react-native-md-textinput'
 import { Actions } from 'react-native-router-flux'
 import { emailChanged, passwordChanged, loginUser } from '../redux/actions'
-import { Card } from './sober'
+import { Card, Input } from './sober'
 import { MButtonRaised, MButton } from './common'
 
 class LoginForm extends Component {
@@ -41,19 +40,18 @@ class LoginForm extends Component {
           <Text style={styles.errorTextStl}>
             {this.props.error}
           </Text>
-          <TextField
-            inputStyle={{ height: 40, lineHeight: 40, marginTop: 0 }}
-            label="Email"
+          <Input
+            placeholder="Email"
             value={this.props.email}
             onChangeText={email => this.props.emailChanged(email)}
           />
-          <TextField
-            inputStyle={{ height: 40, lineHeight: 40 }}
-            label="Mot de passe"
+          <Input
+            placeholder="Mot de passe"
             value={this.props.password}
             onChangeText={password => this.props.passwordChanged(password)}
             secureTextEntry
           />
+
           <View style={styles.signInResetWrapper}>
             <MButton
               onPress={() => Actions.resetPassword()}

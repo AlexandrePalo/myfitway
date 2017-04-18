@@ -17,13 +17,21 @@ import { TBSideMenuButton, TBIconButton } from './components/common'
 const RouterComponent = () => {
   return (
     <Router>
-      <Scene key="auth">
+      <Scene
+        key="auth"
+        initial
+        navigationBarStyle={{ backgroundColor: '#00AA8D' }}
+        titleStyle={{ color: '#fff', fontSize: 16 }}
+        barButtonTextStyle={{ color: '#fff' }}
+        barButtonIconStyle={{ tintColor: '#fff' }}
+        backButtonTextStyle={{ color: '#fff' }}
+      >
         <Scene key="login" component={LoginForm} title="Authentification" />
         <Scene key="signIn" component={SignInForm} title="Nouveau compte" />
         <Scene key="resetPassword" component={ResetPasswordForm} title="Mot de passe oublié" />
       </Scene>
 
-      <Scene key='drawer' component={NavigationDrawer} open={false} initial>
+      <Scene key='drawer' component={NavigationDrawer} open={false}>
         <Scene key="main">
           <Scene
             key="tracks"
@@ -52,6 +60,7 @@ const RouterComponent = () => {
             />
           </Scene>
           <Scene
+            initial
             key="tracer"
             navigationBarStyle={{ backgroundColor: '#00AA8D' }}
             titleStyle={{ color: '#fff', fontSize: 16 }}

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import TextField from 'react-native-md-textinput'
 import { connect } from 'react-redux'
 import { MButtonRaised } from './common'
-import { Card } from './sober'
+import { Card, Input } from './sober'
 import {
   emailSignInChanged,
   passwordSignInChanged,
@@ -47,22 +46,19 @@ class SignInForm extends Component {
           <Text style={styles.errorTextStl}>
             {this.props.error}
           </Text>
-          <TextField
-            inputStyle={{ height: 40, lineHeight: 40, marginTop: 0 }}
-            label="Email"
+          <Input
+            placeholder="Email"
             value={this.props.email}
             onChangeText={email => this.props.emailSignInChanged(email)}
           />
-          <TextField
-            inputStyle={{ height: 40, lineHeight: 40 }}
-            label="Mot de passe"
+          <Input
+            placeholder="Mot de passe"
             value={this.props.password}
             onChangeText={password => this.props.passwordSignInChanged(password)}
             secureTextEntry
           />
-          <TextField
-            inputStyle={{ height: 40, lineHeight: 40 }}
-            label="Confirmation"
+          <Input
+            placeholder="Confirmation du mot de passe"
             value={this.props.passwordConfirmation}
             onChangeText={password => this.props.passwordConfirmationSignInChanged(password)}
             secureTextEntry
