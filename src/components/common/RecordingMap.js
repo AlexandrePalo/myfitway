@@ -19,9 +19,11 @@ const styles = {
 class RecordingMapUnlinked extends Component {
   state = {
     lastPosition: null,
+    mustMapCurrentPosition: false
   }
 
   componentDidMount() {
+    this.props.onRef(this)
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({ firstPosition: position, lastPosition: position })
@@ -38,6 +40,7 @@ class RecordingMapUnlinked extends Component {
 
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID)
+    this.props.onRef(undefined)
   }
 
   watchID: ?number = null;
@@ -56,6 +59,10 @@ class RecordingMapUnlinked extends Component {
     }
   }
 
+  animateToCurrentPosition() {
+    this.map.animateToCoordinate(this.state.lastPosition.coords, 1000)
+  }
+
   render() {
     const { firstPosition } = this.state
     if (!firstPosition) {
@@ -65,11 +72,10 @@ class RecordingMapUnlinked extends Component {
         </View>
       )
     }
-
-    console.log("render")
     return (
       <View style={styles.container}>
         <MapView
+          ref={map => { this.map = map }}
           style={styles.map}
           initialRegion={{
             latitude: firstPosition.coords.latitude,
@@ -77,7 +83,7 @@ class RecordingMapUnlinked extends Component {
             latitudeDelta: 0.02,
             longitudeDelta: 0.02,
           }}
-          //customMapStyle={customMapStyle}
+          mapType={(this.props.mapType !== 'openstreetmap') ? this.props.mapType : 'standard'}
           showsUserLocation
           showsMyLocationButton={false}
           followsUserLocation
@@ -89,6 +95,7 @@ class RecordingMapUnlinked extends Component {
             strokeColor='red'
           />
           {(this.props.trkpts.length > 0) && <MapView.Marker coordinate={this.props.trkpts[0]} />}
+          {(this.props.mapType === 'openstreetmap') && <MapView.UrlTile urlTemplate="http://b.tile.openstreetmap.org/{z}/{x}/{y}.png" />}
         </MapView>
       </View>
     )
@@ -97,184 +104,9 @@ class RecordingMapUnlinked extends Component {
 
 const customMapStyle = [
   {
-    'elementType': 'geometry',
-    'stylers': [
+    stylers: [
       {
-        'color': '#f5f5f5'
-      }
-    ]
-  },
-  {
-    'elementType': 'labels',
-    'stylers': [
-      {
-        'visibility': 'off'
-      }
-    ]
-  },
-  {
-    'elementType': 'labels.icon',
-    'stylers': [
-      {
-        'visibility': 'off'
-      }
-    ]
-  },
-  {
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#616161'
-      }
-    ]
-  },
-  {
-    'elementType': 'labels.text.stroke',
-    'stylers': [
-      {
-        'color': '#f5f5f5'
-      }
-    ]
-  },
-  {
-    'featureType': 'administrative.land_parcel',
-    'stylers': [
-      {
-        'visibility': 'off'
-      }
-    ]
-  },
-  {
-    'featureType': 'administrative.land_parcel',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#bdbdbd'
-      }
-    ]
-  },
-  {
-    'featureType': 'administrative.neighborhood',
-    'stylers': [
-      {
-        'visibility': 'off'
-      }
-    ]
-  },
-  {
-    'featureType': 'poi',
-    'elementType': 'geometry',
-    'stylers': [
-      {
-        'color': '#eeeeee'
-      }
-    ]
-  },
-  {
-    'featureType': 'poi',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#757575'
-      }
-    ]
-  },
-  {
-    'featureType': 'poi.park',
-    'elementType': 'geometry',
-    'stylers': [
-      {
-        'color': '#e5e5e5'
-      }
-    ]
-  },
-  {
-    'featureType': 'poi.park',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#9e9e9e'
-      }
-    ]
-  },
-  {
-    'featureType': 'road',
-    'elementType': 'geometry',
-    'stylers': [
-      {
-        'color': '#ffffff'
-      }
-    ]
-  },
-  {
-    'featureType': 'road.arterial',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#757575'
-      }
-    ]
-  },
-  {
-    'featureType': 'road.highway',
-    'elementType': 'geometry',
-    'stylers': [
-      {
-        'color': '#dadada'
-      }
-    ]
-  },
-  {
-    'featureType': 'road.highway',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#616161'
-      }
-    ]
-  },
-  {
-    'featureType': 'road.local',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#9e9e9e'
-      }
-    ]
-  },
-  {
-    'featureType': 'transit.line',
-    'elementType': 'geometry',
-    'stylers': [
-      {
-        'color': '#e5e5e5'
-      }
-    ]
-  },
-  {
-    'featureType': 'transit.station',
-    'elementType': 'geometry',
-    'stylers': [
-      {
-        'color': '#eeeeee'
-      }
-    ]
-  },
-  {
-    'featureType': 'water',
-    'elementType': 'geometry',
-    'stylers': [
-      {
-        'color': '#c9c9c9'
-      }
-    ]
-  },
-  {
-    'featureType': 'water',
-    'elementType': 'labels.text.fill',
-    'stylers': [
-      {
-        'color': '#9e9e9e'
+        visibility: 'off'
       }
     ]
   }

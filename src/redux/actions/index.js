@@ -135,12 +135,12 @@ export const addTrkptRecordingGeo = (trkpt) => ({
 
 export const setTitleRecordingGeo = (title) => ({
   type: 'SET_TITLE_RECORDING_GEO',
-  title
+  payload: title
 })
 
 export const setDescriptionRecordingGeo = (description) => ({
   type: 'SET_DESCRIPTION_RECORDING_GEO',
-  description
+  payload: description
 })
 
 export const setSharedInfoRecordingGeo = (shared, title, description) => ({

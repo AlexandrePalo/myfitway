@@ -51,15 +51,19 @@ export default (state = INITIAL_STATE, action) => {
         shared_description: action.description
       }
     case 'ADD_TRKPT_RECORDING_GEO':
-      const step = state.trkpts.length > 0 ? step2Coords(state.trkpts[state.trkpts.length - 1], action.payload) : null
+      const lastPoint = state.trkpts.length > 0 ? state.trkpts[state.trkpts.length - 1] : null
+      const step = state.trkpts.length > 0 ? step2Coords(lastPoint, action.payload) : null
+      const lastDistance = lastPoint ? lastPoint.distance : 0
+      const distance = lastPoint ? (lastDistance + distance2Coords(lastPoint, action.payload)) : 0
+      const instantSpeed = lastPoint ? instantSpeed2Coords(lastPoint, { ...action.payload, distance }) : 0
       return {
         ...state,
         stepUp: (step && step.up) ? (state.stepUp + step.value) : state.stepUp,
         stepDown: (step && step.down) ? (state.stepDown + step.value) : state.stepDown,
         trkpts: [...state.trkpts, {
           ...action.payload,
-          distance: state.trkpts.length > 0 ? distance2Coords(state.trkpts[state.trkpts.length - 1], action.payload) : 0,
-          instantSpeed: state.trkpts.length > 0 ? instantSpeed2Coords(state.trkpts[state.trkpts.length - 1], { ...action.payload, distance: distance2Coords(state.trkpts[state.trkpts.length - 1], action.payload) }) : 0,
+          distance,
+          instantSpeed,
         }]
       }
   default:

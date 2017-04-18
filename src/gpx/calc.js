@@ -29,7 +29,7 @@ const step2Coords = (a, b) => {
 }
 
 const instantSpeed2Coords = (a, b) => {
-  const ms = (b.distance - a.distance) * 1000 / (b.timestamp - a.timestamp)
+  const ms = (b.distance - a.distance) / ((b.timestamp - a.timestamp) / 1000)
   const kmh = ms * 3600 / 1000
   return kmh
 }

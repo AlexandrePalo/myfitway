@@ -1,5 +1,9 @@
 {
   "extends": "rallycoding",
+  "env": {
+      "browser": true,
+      "node": true,
+  },
   "rules": {
       "semi": ["error", "never"],
       "prefer-template": 0,

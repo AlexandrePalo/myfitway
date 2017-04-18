@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TextInput } from 'react-native'
 
 const Input = (props) => {
-  const { placeholder, onChangeText, last } = props
+  const { placeholder, onChangeText, value, last } = props
   const styles = {
     containerStl: {
       flexDirection: 'row',
@@ -21,6 +21,7 @@ const Input = (props) => {
   return (
     <View style={containerStl}>
       <TextInput
+        value={value}
         style={inputStl}
         placeholder={placeholder}
         onChangeText={onChangeText}

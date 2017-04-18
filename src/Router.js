@@ -11,7 +11,6 @@ import TrackSearchResult from './components/TrackSearchResult'
 import TracerWelcome from './components/TracerWelcome'
 import RecordingSettings from './components/RecordingSettings'
 import NavigationDrawer from './components/NavigationDrawer'
-import TrackDetails from './components/TrackDetails'
 import TracerFinalize from './components/TracerFinalize'
 import { TBSideMenuButton, TBIconButton } from './components/common'
 
@@ -26,24 +25,21 @@ const RouterComponent = () => {
 
       <Scene key='drawer' component={NavigationDrawer} open={false} initial>
         <Scene key="main">
-          <Scene key="tracks" renderLeftButton={() => <TBSideMenuButton />} >
+          <Scene
+            key="tracks"
+            renderLeftButton={() => <TBSideMenuButton />}
+            navigationBarStyle={{ backgroundColor: '#00AA8D' }}
+            titleStyle={{ color: '#fff', fontSize: 16 }}
+            barButtonTextStyle={{ color: '#fff' }}
+            barButtonIconStyle={{ tintColor: '#fff' }}
+            backButtonTextStyle={{ color: '#fff' }}
+          >
             <Scene
               key="welcometrack"
               component={TrackWelcome}
               title="Parcours"
               rightTitle="Recherche"
-              renderRightButton={() => (
-                <TouchableOpacity
-                  onPress={() => {
-                    Actions.searchForm()
-                  }}
-                >
-                  <Icon
-                    name='search'
-                    size={24}
-                  />
-                </TouchableOpacity>
-              )}
+              renderRightButton={() => <TBIconButton icon="search" onPress={() => Actions.searchForm()} />}
               renderLeftButton={() => <TBSideMenuButton />}
             />
             <Scene key="searchForm" component={TrackSearchForm} title="Recherche" />
@@ -57,13 +53,12 @@ const RouterComponent = () => {
           </Scene>
           <Scene
             key="tracer"
-            initial
             navigationBarStyle={{ backgroundColor: '#00AA8D' }}
             titleStyle={{ color: '#fff', fontSize: 16 }}
             barButtonTextStyle={{ color: '#fff' }}
             barButtonIconStyle={{ tintColor: '#fff' }}
             backButtonTextStyle={{ color: '#fff' }}
-            >
+          >
             <Scene
               key="welcome"
               component={TracerWelcome}
@@ -72,21 +67,18 @@ const RouterComponent = () => {
               renderRightButton={() => <TBIconButton icon='settings' onPress={() => Actions.recordingSettings()} />}
             />
             <Scene
-              barButtonIconStyle={{ color: 'red' }}
-
-              initial
               key="recordingSettings"
               component={RecordingSettings}
               title="Réglages de la carte"
               renderRightButton={() => <TBIconButton icon='done' onPress={() => Actions.welcome({ type: 'reset' })} />}
             />
+            <Scene
+              key="finalize"
+              component={TracerFinalize}
+              title="Finalisation"
+              renderLeftButton={() => <TBSideMenuButton />}
+            />
           </Scene>
-          <Scene
-            key="finalize"
-            component={TracerFinalize}
-            title="Finalisation"
-            renderLeftButton={() => <TBSideMenuButton />}
-          />
         </Scene>
       </Scene>
 

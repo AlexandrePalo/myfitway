@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, Picker } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Actions } from 'react-native-router-flux'
@@ -13,6 +13,9 @@ import {
 } from '../redux/actions'
 
 class TracerWelcome extends Component {
+  state = {
+    mapType: 'standard'
+  }
   renderButton() {
     if (this.props.recording) {
       return (
@@ -77,7 +80,7 @@ class TracerWelcome extends Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={containerStl}>
-          <RecordingMap />
+          <RecordingMap mapType={this.state.mapType} onRef={ref => (this.map = ref)} />
         </View>
         <View style={containerCardStl}>
           <Card>
@@ -118,6 +121,25 @@ class TracerWelcome extends Component {
             </View>
             {this.renderButton()}
           </Card>
+        </View>
+        <View style={bottomMenuStyles.containerStl}>
+          <Picker
+            style={bottomMenuStyles.pickerStl}
+            selectedValue={this.state.mapType}
+            onValueChange={mapType => this.setState({ mapType })}
+          >
+            <Picker.Item label="Google Maps" value="standard" />
+            <Picker.Item label="Satellite" value="satellite" />
+            <Picker.Item label="Hybride" value="hybrid" />
+            <Picker.Item label="OpenStreetMap" value="openstreetmap" />
+          </Picker>
+          <TouchableOpacity
+            style={bottomMenuStyles.iconCStl}
+            onPress={() => this.map.animateToCurrentPosition()}
+          >
+            <Icon name="gps-fixed" size={20} color="#fff" />
+            <Text style={bottomMenuStyles.textStl}>Ma position</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -183,6 +205,37 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  }
+}
+
+const bottomMenuStyles = {
+  containerStl: {
+    backgroundColor: '#00AA8D',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    position: 'absolute',
+    height: 30,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  iconCStl: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  textStl: {
+    marginLeft: 16,
+    color: '#fff',
+    fontSize: 16
+  },
+  pickerStl: {
+    flex: 1,
+    color: '#fff',
+    marginRight: 16,
+    backgroundColor: '#00AA8D',
   }
 }
 

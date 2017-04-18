@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, ScrollView, Modal } from 'react-native'
-import TextField from 'react-native-md-textinput'
+import { Actions } from 'react-native-router-flux'
 import _ from 'lodash'
 import TrackDetails from './TrackDetails'
 import { MButtonRaised, MButton, ModalViewYesNo } from './common'
-import { Card } from './sober'
-import { setTitleRecordingGeo, setDescriptionRecordingGeo } from '../redux/actions'
+import { Card, Input } from './sober'
+import { setTitleRecordingGeo, setDescriptionRecordingGeo, resetRecordingGeo } from '../redux/actions'
 import { duration } from '../gpx'
 
 class TracerFinalize extends Component {
@@ -27,18 +27,15 @@ class TracerFinalize extends Component {
           stepDown={stepDown}
         />
         <Card>
-          <TextField
-            wrapperStyle={{ marginTop: -10 }}
-            inputStyle={{ height: 40, lineHeight: 40, marginTop: 0 }}
-            label="Titre"
-            value={this.props.title}
+          <Input
+            placeholder="Titre"
             onChangeText={title => this.props.setTitleRecordingGeo(title)}
+            value={this.props.title}
           />
-          <TextField
-            inputStyle={{ height: 40, lineHeight: 40, marginTop: 0 }}
-            label="Description"
-            value={this.props.description}
+          <Input
+            placeholder="Description"
             onChangeText={description => this.props.setDescriptionRecordingGeo(description)}
+            value={this.props.description}
           />
           <View style={styles.cancelSaveWrapper}>
             <MButton
@@ -68,7 +65,11 @@ class TracerFinalize extends Component {
           <ModalViewYesNo
             questionText='Etes-vous sûr de vouloir supprimer le tracé ? Il ne sera plus disponible par la suite.'
             onNoPress={() => this.setState({ modalDeleteVisible: false })}
-            onYesPress={() => this.setState({ modalDeleteVisible: false })}
+            onYesPress={() => {
+              this.props.resetRecordingGeo()
+              this.setState({ modalDeleteVisible: false })
+              Actions.welcome({ type: 'reset' })
+            }}
           />
         </Modal>
 
@@ -97,5 +98,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { setTitleRecordingGeo, setDescriptionRecordingGeo }
+  { setTitleRecordingGeo, setDescriptionRecordingGeo, resetRecordingGeo }
 )(TracerFinalize)
