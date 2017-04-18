@@ -18,14 +18,13 @@ const styles = {
 
 class RecordingMapUnlinked extends Component {
   state = {
-    initialPosition: null,
     lastPosition: null,
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({ initialPosition: position })
+        this.setState({ firstPosition: position, lastPosition: position })
       },
       (error) => console.log(JSON.stringify(error)),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
@@ -33,7 +32,7 @@ class RecordingMapUnlinked extends Component {
     this.watchID = navigator.geolocation.watchPosition(
       position => this.positionWatcher(position),
       (error) => console.log(JSON.stringify(error)),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 5 }
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 20 }
     )
   }
 
@@ -44,7 +43,6 @@ class RecordingMapUnlinked extends Component {
   watchID: ?number = null;
 
   positionWatcher(position) {
-    console.log(position)
     this.setState({
       lastPosition: position
     })
@@ -59,31 +57,30 @@ class RecordingMapUnlinked extends Component {
   }
 
   render() {
-    const { lastPosition, initialPosition } = this.state
-    let region = null
-    if (lastPosition || initialPosition) {
-      region = {
-        latitude: lastPosition ? lastPosition.coords.latitude : initialPosition.coords.latitude,
-        longitude: lastPosition ? lastPosition.coords.longitude : initialPosition.coords.longitude,
-        latitudeDelta: 0.015,
-        longitudeDelta: 0.0121,
-      }
-    }
-    if (!region) {
+    const { firstPosition } = this.state
+    if (!firstPosition) {
       return (
         <View style={styles.container}>
           <Spinner size="large" />
         </View>
       )
     }
+
+    console.log("render")
     return (
       <View style={styles.container}>
         <MapView
           style={styles.map}
-          region={region}
+          initialRegion={{
+            latitude: firstPosition.coords.latitude,
+            longitude: firstPosition.coords.longitude,
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.02,
+          }}
           //customMapStyle={customMapStyle}
           showsUserLocation
           showsMyLocationButton={false}
+          followsUserLocation
         >
           <MapView.Polyline
             style={{ zIndex: 5 }}
