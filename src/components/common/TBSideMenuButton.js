@@ -17,6 +17,7 @@ const TBSideMenuButton = (props, context) => {
       <Icon
         name='menu'
         size={24}
+        style={{ color: '#fff' }}
       />
     </TouchableOpacity>
   )

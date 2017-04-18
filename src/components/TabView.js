@@ -41,12 +41,6 @@ class TabView extends Component {
               {this.renderUserMail()}
             </View>
           </View>
-          <View style={styles.pickerContainerStl}>
-            <Text style={styles.pickerTextStl}>Sport :</Text>
-            <View style={styles.pickerStl}>
-              <CurrentCategoryPicker />
-            </View>
-          </View>
         </View>
 
         <View style={styles.menuContainerStl}>
@@ -76,7 +70,7 @@ const styles = {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#00AA8D',
   },
   logoSubtitleContainerStl: {
     marginTop: 16,
@@ -103,22 +97,6 @@ const styles = {
     color: '#000',
     opacity: 0.54,
     alignSelf: 'center'
-  },
-  pickerContainerStl: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginLeft: 16,
-    marginRight: 16
-  },
-  pickerTextStl: {
-    color: '#000',
-    opacity: 0.87,
-    fontSize: 16,
-    flex: 1
-  },
-  pickerStl: {
-    flex: 1
   },
   menuContainerStl: {
     backgroundColor: '#FAFAFA',

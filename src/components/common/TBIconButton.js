@@ -12,6 +12,7 @@ const TBIconButton = ({ icon, onPress }) => {
       <Icon
         name={icon}
         size={24}
+        style={{ color: '#fff' }}
       />
     </TouchableOpacity>
   )

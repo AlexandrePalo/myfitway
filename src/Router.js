@@ -55,19 +55,30 @@ const RouterComponent = () => {
               renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} /> }
             />
           </Scene>
-          <Scene key="tracer" initial>
+          <Scene
+            key="tracer"
+            initial
+            navigationBarStyle={{ backgroundColor: '#00AA8D' }}
+            titleStyle={{ color: '#fff', fontSize: 16 }}
+            barButtonTextStyle={{ color: '#fff' }}
+            barButtonIconStyle={{ tintColor: '#fff' }}
+            backButtonTextStyle={{ color: '#fff' }}
+            >
             <Scene
               key="welcome"
               component={TracerWelcome}
               title="Suivi GPS"
               renderLeftButton={() => <TBSideMenuButton />}
-              renderRightButton={() => <TBIconButton icon='directions-bike' onPress={() => Actions.recordingSettings()} />}
+              renderRightButton={() => <TBIconButton icon='settings' onPress={() => Actions.recordingSettings()} />}
             />
             <Scene
+              barButtonIconStyle={{ color: 'red' }}
+
               initial
               key="recordingSettings"
               component={RecordingSettings}
-              title="Réglages de l'enregistrement"
+              title="Réglages de la carte"
+              renderRightButton={() => <TBIconButton icon='done' onPress={() => Actions.welcome({ type: 'reset' })} />}
             />
           </Scene>
           <Scene
