@@ -2,9 +2,9 @@ import React, { PropTypes, Component } from 'react'
 import { Text, View, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import { logoutUser } from '../redux/actions'
-import { Spinner } from './common'
-import { Link, Section } from './sideMenu'
+import { logoutUser } from '../../redux/actions'
+import { Spinner } from '../common'
+import { Link, Section } from '../sideMenu'
 
 const contextTypes = {
   drawer: React.PropTypes.object,
@@ -16,7 +16,7 @@ const propTypes = {
   title: PropTypes.string,
 }
 
-class TabView extends Component {
+class TabViewUnlinked extends Component {
   renderUserMail() {
     const { user, loading } = this.props
     if (loading === true) {
@@ -112,7 +112,9 @@ const mapStateToProps = (state) => ({
   loading: state.auth.loading
 })
 
-export default connect(
+const TabView = connect(
   mapStateToProps,
   { logoutUser }
-)(TabView)
+)(TabViewUnlinked)
+
+export { TabView }

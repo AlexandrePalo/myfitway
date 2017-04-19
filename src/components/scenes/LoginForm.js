@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import { emailChanged, passwordChanged, loginUser } from '../redux/actions'
-import { Card, Input } from './sober'
-import { MButtonRaised, MButton } from './common'
+import { emailChanged, passwordChanged, loginUser } from '../../redux/actions'
+import { Card, Input } from '../sober'
+import { MButtonRaised, MButton } from '../common'
 
 class LoginForm extends Component {
 

@@ -3,14 +3,13 @@ import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import TextField from 'react-native-md-textinput'
 import { Actions } from 'react-native-router-flux'
-import { Card } from './sober'
-import { MButtonRaised } from './common/MButtonRaised'
-import { SliderWithTwoValues } from './common/SliderWithTwoValues'
+import { Card } from '../sober'
+import { MButtonRaised, SliderWithTwoValues } from '../common'
 import {
   searchTextChanged,
   distanceMinChanged, distanceMaxChanged,
   durationMinChanged, durationMaxChanged
-} from '../redux/actions'
+} from '../../redux/actions'
 
 class TrackSearchForm extends Component {
   onButtonPress() {

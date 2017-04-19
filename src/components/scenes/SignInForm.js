@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { MButtonRaised } from './common'
-import { Card, Input } from './sober'
+import { MButtonRaised } from '../common'
+import { Card, Input } from '../sober'
 import {
   emailSignInChanged,
   passwordSignInChanged,
   passwordConfirmationSignInChanged,
   createUser,
   errorPasswordSignIn
-} from '../redux/actions'
+} from '../../redux/actions'
 
 class SignInForm extends Component {
 

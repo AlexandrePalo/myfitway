@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Actions } from 'react-native-router-flux'
 import _ from 'lodash'
-import { MButtonRaised, RecordingMap } from './common'
-import { Card } from './sober'
+import { MButtonRaised, RecordingMap } from '../common'
+import { Card } from '../sober'
 import {
   startRecordingGeo,
   stopRecordingGeo,
   resetRecordingGeo
-} from '../redux/actions'
+} from '../../redux/actions'
 
 class TracerWelcome extends Component {
   state = {

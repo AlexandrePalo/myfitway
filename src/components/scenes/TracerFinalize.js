@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { View, ScrollView, Modal } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import _ from 'lodash'
-import TrackDetails from './TrackDetails'
-import { MButtonRaised, MButton, ModalViewYesNo } from './common'
-import { Card, Input } from './sober'
-import { setTitleRecordingGeo, setDescriptionRecordingGeo, resetRecordingGeo } from '../redux/actions'
-import { duration } from '../gpx'
+import TrackDetails from '../common/TrackDetails'
+import { MButtonRaised, MButton, ModalViewYesNo } from '../common'
+import { Card, Input } from '../sober'
+import { setTitleRecordingGeo, setDescriptionRecordingGeo, resetRecordingGeo } from '../../redux/actions'
+import { duration } from '../../gpx'
 
 class TracerFinalize extends Component {
 

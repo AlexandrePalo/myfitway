@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { Card, LinkIcon } from './sober'
+import { Card, LinkIcon } from '../sober'
 
 class RecordingSettings extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
-import { TrackWelcomeNewTracks, TrackWelcomeFamousTracks } from './common'
+import { TrackWelcomeNewTracks, TrackWelcomeFamousTracks } from '../common'
 
 class TrackWelcome extends Component {
   render() {

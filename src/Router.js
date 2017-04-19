@@ -1,17 +1,15 @@
 import React from 'react'
 import { Scene, Router, Actions } from 'react-native-router-flux'
-import { TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import LoginForm from './components/LoginForm'
-import SignInForm from './components/SignInForm'
-import ResetPasswordForm from './components/ResetPasswordForm'
-import TrackWelcome from './components/TrackWelcome'
-import TrackSearchForm from './components/TrackSearchForm'
-import TrackSearchResult from './components/TrackSearchResult'
-import TracerWelcome from './components/TracerWelcome'
-import RecordingSettings from './components/RecordingSettings'
-import NavigationDrawer from './components/NavigationDrawer'
-import TracerFinalize from './components/TracerFinalize'
+import LoginForm from './components/scenes/LoginForm'
+import SignInForm from './components/scenes/SignInForm'
+import ResetPasswordForm from './components/scenes/ResetPasswordForm'
+import TrackWelcome from './components/scenes/TrackWelcome'
+import TrackSearchForm from './components/scenes/TrackSearchForm'
+import TrackSearchResult from './components/scenes/TrackSearchResult'
+import TracerWelcome from './components/scenes/TracerWelcome'
+import RecordingSettings from './components/scenes/RecordingSettings'
+import { NavigationDrawer } from './components/navigation'
+import TracerFinalize from './components/scenes/TracerFinalize'
 import { TBSideMenuButton, TBIconButton } from './components/common'
 
 const RouterComponent = () => {
@@ -56,7 +54,7 @@ const RouterComponent = () => {
               component={TrackSearchResult}
               title="Résultats"
               rightTitle="Accueil"
-              renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} /> }
+              renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} />}
             />
           </Scene>
           <Scene
