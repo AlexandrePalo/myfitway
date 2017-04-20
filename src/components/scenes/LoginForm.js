@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, ToastAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import { emailChanged, passwordChanged, loginUser } from '../../redux/actions'
+import { emailChanged, passwordChanged, loginUser, showedLoginError } from '../../redux/actions'
 import { Card, Input } from '../sober'
 import { MButtonRaised, MButton } from '../common'
 
@@ -10,7 +10,8 @@ class LoginForm extends Component {
 
   componentDidUpdate() {
     if (this.props.error) {
-      ToastAndroid.show(this.props.error, ToastAndroid.LONG)
+      ToastAndroid.show(this.props.error, ToastAndroid.SHORT)
+      this.props.showedLoginError()
     }
   }
 
@@ -47,12 +48,15 @@ class LoginForm extends Component {
             placeholder="Email"
             value={this.props.email}
             onChangeText={email => this.props.emailChanged(email)}
+            autoFocus
+            keyboardType='email-address'
           />
           <Input
             placeholder="Mot de passe"
             value={this.props.password}
             onChangeText={password => this.props.passwordChanged(password)}
             secureTextEntry
+            onSubmitEditing={this.onButtonPress.bind(this)}
           />
 
           <View style={styles.signInResetWrapper}>
@@ -116,5 +120,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  { emailChanged, passwordChanged, loginUser }
+  { emailChanged, passwordChanged, loginUser, showedLoginError }
 )(LoginForm)

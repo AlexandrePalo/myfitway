@@ -31,6 +31,10 @@ export const loginUser = (email, password) => {
   }
 }
 
+export const showedLoginError = () => ({
+  type: 'SHOWED_LOGIN_ERROR'
+})
+
 export const searchTextChanged = (text) => ({
   type: 'TEXT_SEARCH_CHANGED',
   payload: text
@@ -99,6 +103,10 @@ export const createUser = (email, password) => {
       })
   }
 }
+
+export const showedSignInError = () => ({
+  type: 'SHOWED_SIGNIN_ERROR'
+})
 
 export const createUserReset = () => ({
   type: 'CREATE_USER_RESET'

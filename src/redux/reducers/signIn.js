@@ -56,6 +56,8 @@ const signIn = (state = INITIAL_STATE, action) => {
       }
     case 'CREATE_USER_RESET':
       return INITIAL_STATE
+      case 'SHOWED_SIGNIN_ERROR':
+        return { ...state, error: null }
     default:
       return state
   }

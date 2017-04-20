@@ -36,6 +36,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, loading: false, user: null }
     case 'LOGOUT_USER_FAIL':
       return { ...state, loading: false, error: 'Erreur inconnue' }
+    case 'SHOWED_LOGIN_ERROR':
+      return { ...state, error: null }
     default:
       return state
   }
