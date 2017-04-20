@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ToastAndroid } from 'react-native'
+import { Text, View, ToastAndroid, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { emailChanged, passwordChanged, loginUser, showedLoginError } from '../../redux/actions'
@@ -7,6 +7,11 @@ import { Card, Input } from '../sober'
 import { MButtonRaised, MButton } from '../common'
 
 class LoginForm extends Component {
+  componentDidMount() {
+    if (this.props.user) {
+      Actions.tracks()
+    }
+  }
 
   componentDidUpdate() {
     if (this.props.error) {
@@ -17,6 +22,7 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.props
+    Keyboard.dismiss()
     this.props.loginUser(email, password)
   }
 
