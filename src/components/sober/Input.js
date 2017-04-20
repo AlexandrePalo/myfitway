@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TextInput } from 'react-native'
 
 const Input = (props) => {
-  const { placeholder, onChangeText, value, last, secureTextEntry } = props
+  const { placeholder, onChangeText, value, last } = props
   const styles = {
     containerStl: {
       flexDirection: 'row',
@@ -27,7 +27,7 @@ const Input = (props) => {
         onChangeText={onChangeText}
         selectionColor='#00AA8D'
         underlineColorAndroid='transparent'
-        secureTextEntry={secureTextEntry}
+        
       />
     </View>
   )

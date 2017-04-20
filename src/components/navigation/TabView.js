@@ -10,12 +10,6 @@ const contextTypes = {
   drawer: React.PropTypes.object,
 }
 
-const propTypes = {
-  name: PropTypes.string,
-  sceneStyle: View.propTypes.style,
-  title: PropTypes.string,
-}
-
 class TabViewUnlinked extends Component {
   renderUserMail() {
     const { user, loading } = this.props
@@ -34,7 +28,7 @@ class TabViewUnlinked extends Component {
         <View style={styles.headerContainerStl}>
           <View style={styles.logoSubtitleContainerStl}>
             <View style={styles.logoContainerStl}>
-              <Image source={require('../img/logo.png')} />
+              <Image source={require('../../img/logo.png')} />
             </View>
             <View style={styles.subtitleContainerStl}>
               <Text style={styles.subtitleTextStl}>MyFitWay</Text>
@@ -104,8 +98,7 @@ const styles = {
   }
 }
 
-TabView.contextTypes = contextTypes
-TabView.propTypes = propTypes
+TabViewUnlinked.contextTypes = contextTypes
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,

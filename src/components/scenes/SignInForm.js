@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ToastAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { MButtonRaised } from '../common'
 import { Card, Input } from '../sober'
@@ -12,6 +12,12 @@ import {
 } from '../../redux/actions'
 
 class SignInForm extends Component {
+
+  componentDidUpdate() {
+    if (this.props.error) {
+      ToastAndroid.show(this.props.error, ToastAndroid.LONG)
+    }
+  }
 
   onButtonPress() {
     const { email, password, passwordConfirmation } = this.props
@@ -43,9 +49,6 @@ class SignInForm extends Component {
     return (
       <View style={styles.containerStl}>
         <Card>
-          <Text style={styles.errorTextStl}>
-            {this.props.error}
-          </Text>
           <Input
             placeholder="Email"
             value={this.props.email}
@@ -75,12 +78,6 @@ const styles = {
     paddingTop: 56,
     backgroundColor: '#f5f5f5',
     flex: 1
-  },
-  errorTextStl: {
-    marginTop: 10,
-    fontSize: 16,
-    alignSelf: 'center',
-    color: 'red'
   },
   buttonWrapper: {
     marginTop: 10,

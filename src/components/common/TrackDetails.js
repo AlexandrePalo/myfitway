@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { View, Text, Dimensions } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { SmoothLine } from 'react-native-pathjs-charts'
-import { chartDatasetAltDis } from '../gpx'
-import { shortFrenchHumanizer } from '../tools'
-import { DisplayTrackMap } from './common'
-import { Card } from './sober'
+import { chartDatasetAltDis } from '../../gpx'
+import { shortFrenchHumanizer } from '../../tools'
+import { DisplayTrackMap } from './'
+import { Card } from '../sober'
 
 class TrackDetails extends Component {
   state = {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ToastAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { emailChanged, passwordChanged, loginUser } from '../../redux/actions'
@@ -7,6 +7,12 @@ import { Card, Input } from '../sober'
 import { MButtonRaised, MButton } from '../common'
 
 class LoginForm extends Component {
+
+  componentDidUpdate() {
+    if (this.props.error) {
+      ToastAndroid.show(this.props.error, ToastAndroid.LONG)
+    }
+  }
 
   onButtonPress() {
     const { email, password } = this.props
@@ -36,9 +42,6 @@ class LoginForm extends Component {
         <Card>
           <Text style={styles.titleStl}>
             MyFitWay
-          </Text>
-          <Text style={styles.errorTextStl}>
-            {this.props.error}
           </Text>
           <Input
             placeholder="Email"
@@ -84,12 +87,6 @@ const styles = {
     fontSize: 30,
     color: '#000',
     opacity: 0.87
-  },
-  errorTextStl: {
-    marginTop: 10,
-    fontSize: 16,
-    alignSelf: 'center',
-    color: 'red'
   },
   signInResetWrapper: {
     marginTop: 30,
