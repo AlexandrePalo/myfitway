@@ -90,7 +90,6 @@ export const createUser = (email, password) => {
           type: 'CREATE_USER_SUCCESS',
           payload: user
         })
-        Actions.login({ type: 'reset' })
       })
       .catch(error => {
         dispatch({
@@ -100,6 +99,10 @@ export const createUser = (email, password) => {
       })
   }
 }
+
+export const createUserReset = () => ({
+  type: 'CREATE_USER_RESET'
+})
 
 export const logoutUser = () => {
   return (dispatch) => {

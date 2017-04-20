@@ -1,21 +1,27 @@
 import React, { Component } from 'react'
-import { View, Text, ToastAndroid } from 'react-native'
+import { View, Text, ToastAndroid, Modal } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import { MButtonRaised } from '../common'
+import { MButtonRaised, ModalView } from '../common'
 import { Card, Input } from '../sober'
 import {
   emailSignInChanged,
   passwordSignInChanged,
   passwordConfirmationSignInChanged,
   createUser,
-  errorPasswordSignIn
+  errorPasswordSignIn,
+  createUserReset
 } from '../../redux/actions'
 
 class SignInForm extends Component {
 
+  state = {
+    modalVisible: false
+  }
+
   componentDidUpdate() {
     if (this.props.error) {
-      ToastAndroid.show(this.props.error, ToastAndroid.LONG)
+      ToastAndroid.show(this.props.error, ToastAndroid.SHORT)
     }
   }
 
@@ -35,6 +41,12 @@ class SignInForm extends Component {
         <MButtonRaised disabled loading onPress={this.onButtonPress.bind(this)} />
       </View>
       )
+    }
+    if (this.props.success) {
+      if (!this.state.modalVisible) {
+        this.props.createUserReset()
+        this.setState({ modalVisible: true })
+      }
     }
     return (
       <View style={styles.buttonWrapper}>
@@ -68,6 +80,20 @@ class SignInForm extends Component {
           />
           {this.renderButton()}
         </Card>
+        <Modal
+          animationType='slide'
+          transparent
+          visible={this.state.modalVisible}
+          onRequestClose={() => Actions.login({ type: 'reset' })}
+        >
+          <ModalView
+            asumptionText='Votre compte est créé, vous pouvez désormais vous connecter !'
+            onPress={() => {
+              this.setState({ modalVisible: false })
+              Actions.login({ type: 'reset' })
+            }}
+          />
+        </Modal>
       </View>
     )
   }
@@ -85,13 +111,17 @@ const styles = {
   }
 }
 
-const mapStateToProps = (state) => ({
-  email: state.signIn.email,
-  password: state.signIn.password,
-  passwordConfirmation: state.signIn.passwordConfirmation,
-  loading: state.signIn.loading,
-  error: state.signIn.error
-})
+const mapStateToProps = (state) => {
+  const { email, password, passwordConfirmation, loading, error, success } = state.signIn
+  return {
+    email,
+    password,
+    passwordConfirmation,
+    loading,
+    error,
+    success
+  }
+}
 
 export default connect(
   mapStateToProps,
@@ -100,6 +130,7 @@ export default connect(
     passwordSignInChanged,
     passwordConfirmationSignInChanged,
     createUser,
-    errorPasswordSignIn
+    errorPasswordSignIn,
+    createUserReset
   }
 )(SignInForm)

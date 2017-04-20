@@ -3,7 +3,8 @@ const INITIAL_STATE = {
   password: '',
   passwordConfirmation: '',
   loading: false,
-  error: null
+  error: null,
+  success: false
 }
 
 const signIn = (state = INITIAL_STATE, action) => {
@@ -31,7 +32,8 @@ const signIn = (state = INITIAL_STATE, action) => {
         email: '',
         password: '',
         passwordConfirmation: '',
-        error: ''
+        error: '',
+        success: true
       }
     case 'CREATE_USER_FAIL':
       let error = 'Erreur inconnue'
@@ -52,6 +54,8 @@ const signIn = (state = INITIAL_STATE, action) => {
         passwordConfirmation: '',
         error,
       }
+    case 'CREATE_USER_RESET':
+      return INITIAL_STATE
     default:
       return state
   }
