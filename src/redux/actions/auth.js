@@ -49,3 +49,12 @@ export const logoutUser = () => {
       })
   }
 }
+
+export const requestUpdateLoggedIn = () => ({ type: 'REQUEST_UPDATE_LOGGED_IN' })
+
+export const updateLoggedIn = (user) => ({
+  type: 'UPDATE_LOGGED_IN',
+  payload: user
+})
+
+export const failUpdateLoggedIn = () => ({ type: 'FAIL_UPDATE_LOGGED_IN' })

@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { emailChanged, passwordChanged, loginUser, showedLoginError } from '../../redux/actions'
 import { Card, Input } from '../sober'
-import { MButtonRaised, MButton } from '../common'
+import { MButtonRaised, MButton, Spinner } from '../common'
 
 class LoginForm extends Component {
-  componentDidMount() {
-    if (this.props.user) {
-      Actions.tracks()
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user && !nextProps.loadingFirstCall) {
+      Actions.drawer({ type: 'reset' })
     }
   }
 
@@ -44,6 +44,14 @@ class LoginForm extends Component {
   }
 
   render() {
+    if (this.props.loadingFirstCall) {
+      return (
+        <View style={styles.containerStl}>
+          <Spinner size='large' />
+        </View>
+      )
+    }
+
     return (
       <View style={styles.containerStl}>
         <Card>
@@ -121,7 +129,8 @@ const mapStateToProps = (state) => ({
   password: state.auth.password,
   loading: state.auth.loading,
   user: state.auth.user,
-  error: state.auth.error
+  error: state.auth.error,
+  loadingFirstCall: state.auth.loadingFirstCall
 })
 
 export default connect(

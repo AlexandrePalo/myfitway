@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Scene, Router, Actions } from 'react-native-router-flux'
+import firebase from 'firebase'
+import { requestUpdateLoggedIn, updateLoggedIn, failUpdateLoggedIn } from './redux/actions'
 import LoginForm from './components/scenes/LoginForm'
 import SignInForm from './components/scenes/SignInForm'
 import ResetPasswordForm from './components/scenes/ResetPasswordForm'
@@ -12,85 +15,101 @@ import { NavigationDrawer } from './components/navigation'
 import TracerFinalize from './components/scenes/TracerFinalize'
 import { TBSideMenuButton, TBIconButton } from './components/common'
 
-const RouterComponent = () => {
-  return (
-    <Router>
-      <Scene
-        key="auth"
-        initial
-        navigationBarStyle={{ backgroundColor: '#00AA8D' }}
-        titleStyle={{ color: '#fff', fontSize: 16 }}
-        barButtonTextStyle={{ color: '#fff' }}
-        barButtonIconStyle={{ tintColor: '#fff' }}
-        backButtonTextStyle={{ color: '#fff' }}
-      >
-        <Scene key="login" component={LoginForm} title="Authentification" />
-        <Scene key="signIn" component={SignInForm} title="Nouveau compte" />
-        <Scene key="resetPassword" component={ResetPasswordForm} title="Mot de passe oublié" />
-      </Scene>
+class RouterComponent extends Component {
+  componentDidMount() {
+    this.props.requestUpdateLoggedIn()
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.updateLoggedIn(user)
+      } else {
+        this.props.failUpdateLoggedIn()
+      }
+    })
+  }
 
-      <Scene key='drawer' component={NavigationDrawer} open={false}>
-        <Scene key="main">
-          <Scene
-            key="tracks"
-            renderLeftButton={() => <TBSideMenuButton />}
-            navigationBarStyle={{ backgroundColor: '#00AA8D' }}
-            titleStyle={{ color: '#fff', fontSize: 16 }}
-            barButtonTextStyle={{ color: '#fff' }}
-            barButtonIconStyle={{ tintColor: '#fff' }}
-            backButtonTextStyle={{ color: '#fff' }}
-          >
+  render() {
+    return (
+      <Router>
+        <Scene
+          key="auth"
+          initial
+          navigationBarStyle={{ backgroundColor: '#00AA8D' }}
+          titleStyle={{ color: '#fff', fontSize: 16 }}
+          barButtonTextStyle={{ color: '#fff' }}
+          barButtonIconStyle={{ tintColor: '#fff' }}
+          backButtonTextStyle={{ color: '#fff' }}
+        >
+          <Scene key="login" component={LoginForm} title="Authentification" />
+          <Scene key="signIn" component={SignInForm} title="Nouveau compte" />
+          <Scene key="resetPassword" component={ResetPasswordForm} title="Mot de passe oublié" />
+        </Scene>
+
+        <Scene key='drawer' component={NavigationDrawer} open={false}>
+          <Scene key="main">
             <Scene
-              key="welcometrack"
-              component={TrackWelcome}
-              title="Parcours"
-              rightTitle="Recherche"
-              renderRightButton={() => <TBIconButton icon="search" onPress={() => Actions.searchForm()} />}
+              key="tracks"
               renderLeftButton={() => <TBSideMenuButton />}
-            />
-            <Scene key="searchForm" component={TrackSearchForm} title="Recherche" />
+              navigationBarStyle={{ backgroundColor: '#00AA8D' }}
+              titleStyle={{ color: '#fff', fontSize: 16 }}
+              barButtonTextStyle={{ color: '#fff' }}
+              barButtonIconStyle={{ tintColor: '#fff' }}
+              backButtonTextStyle={{ color: '#fff' }}
+            >
+              <Scene
+                key="welcometrack"
+                component={TrackWelcome}
+                title="Parcours"
+                rightTitle="Recherche"
+                renderRightButton={() => <TBIconButton icon="search" onPress={() => Actions.searchForm()} />}
+                renderLeftButton={() => <TBSideMenuButton />}
+              />
+              <Scene key="searchForm" component={TrackSearchForm} title="Recherche" />
+              <Scene
+                key="searchResults"
+                component={TrackSearchResult}
+                title="Résultats"
+                rightTitle="Accueil"
+                renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} />}
+              />
+            </Scene>
             <Scene
-              key="searchResults"
-              component={TrackSearchResult}
-              title="Résultats"
-              rightTitle="Accueil"
-              renderRightButton={() => <TBIconButton icon='home' onPress={() => Actions.welcometrack({ type: 'reset' })} />}
-            />
-          </Scene>
-          <Scene
-            initial
-            key="tracer"
-            navigationBarStyle={{ backgroundColor: '#00AA8D' }}
-            titleStyle={{ color: '#fff', fontSize: 16 }}
-            barButtonTextStyle={{ color: '#fff' }}
-            barButtonIconStyle={{ tintColor: '#fff' }}
-            backButtonTextStyle={{ color: '#fff' }}
-          >
-            <Scene
-              key="welcome"
-              component={TracerWelcome}
-              title="Suivi GPS"
-              renderLeftButton={() => <TBSideMenuButton />}
-              renderRightButton={() => <TBIconButton icon='settings' onPress={() => Actions.recordingSettings()} />}
-            />
-            <Scene
-              key="recordingSettings"
-              component={RecordingSettings}
-              title="Réglages de la carte"
-              renderRightButton={() => <TBIconButton icon='done' onPress={() => Actions.welcome({ type: 'reset' })} />}
-            />
-            <Scene
-              key="finalize"
-              component={TracerFinalize}
-              title="Finalisation"
-              renderLeftButton={() => <TBSideMenuButton />}
-            />
+              initial
+              key="tracer"
+              navigationBarStyle={{ backgroundColor: '#00AA8D' }}
+              titleStyle={{ color: '#fff', fontSize: 16 }}
+              barButtonTextStyle={{ color: '#fff' }}
+              barButtonIconStyle={{ tintColor: '#fff' }}
+              backButtonTextStyle={{ color: '#fff' }}
+            >
+              <Scene
+                key="welcome"
+                component={TracerWelcome}
+                title="Suivi GPS"
+                renderLeftButton={() => <TBSideMenuButton />}
+                renderRightButton={() => <TBIconButton icon='settings' onPress={() => Actions.recordingSettings()} />}
+              />
+              <Scene
+                key="recordingSettings"
+                component={RecordingSettings}
+                title="Réglages de la carte"
+                renderRightButton={() => <TBIconButton icon='done' onPress={() => Actions.welcome({ type: 'reset' })} />}
+              />
+              <Scene
+                key="finalize"
+                component={TracerFinalize}
+                title="Finalisation"
+                renderLeftButton={() => <TBSideMenuButton />}
+              />
+            </Scene>
           </Scene>
         </Scene>
-      </Scene>
 
-    </Router>
-  )
+      </Router>
+    )
+  }
 }
 
-export default RouterComponent
+export default connect(
+  null,
+  { requestUpdateLoggedIn, updateLoggedIn, failUpdateLoggedIn }
+)(RouterComponent)
