@@ -83,7 +83,7 @@ class RecordingMapUnlinked extends Component {
             latitudeDelta: 0.02,
             longitudeDelta: 0.02,
           }}
-          mapType={(this.props.mapType !== 'openstreetmap') ? this.props.mapType : 'standard'}
+          mapType={(this.props.mapType !== 'openstreetmap') ? this.props.mapType : 'none'}
           showsUserLocation
           showsMyLocationButton={false}
           followsUserLocation
@@ -101,16 +101,6 @@ class RecordingMapUnlinked extends Component {
     )
   }
 }
-
-const customMapStyle = [
-  {
-    stylers: [
-      {
-        visibility: 'off'
-      }
-    ]
-  }
-]
 
 //<MapView.UrlTile urlTemplate="http://a.tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png" />
 
