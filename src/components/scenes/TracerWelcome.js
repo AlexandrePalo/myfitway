@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, Picker } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Actions } from 'react-native-router-flux'
+import { MenuOption } from 'react-native-popup-menu'
 import _ from 'lodash'
-import { MButtonRaised, RecordingMap } from '../common'
+import { MButtonRaised, RecordingMap, TBPopupMenu } from '../common'
 import { Card } from '../sober'
 import {
   startRecordingGeo,
@@ -123,22 +124,19 @@ class TracerWelcome extends Component {
           </Card>
         </View>
         <View style={bottomMenuStyles.containerStl}>
-          <Picker
-            style={bottomMenuStyles.pickerStl}
-            selectedValue={this.state.mapType}
-            onValueChange={mapType => this.setState({ mapType })}
-          >
-            <Picker.Item label="Google Maps" value="standard" />
-            <Picker.Item label="Satellite" value="satellite" />
-            <Picker.Item label="Hybride" value="hybrid" />
-            <Picker.Item label="OpenStreetMap" value="openstreetmap" />
-          </Picker>
+          <View style={bottomMenuStyles.iconCStl}>
+            <TBPopupMenu icon='layers' onSelect={mapType => this.setState({ mapType })}>
+              <MenuOption value='standard' text='Google Maps' />
+              <MenuOption value='satellite' text='Satellite' />
+              <MenuOption value='hybrid' text='Hybride' />
+              <MenuOption value='openstreetmap' text='OpenStreetMap' />
+            </TBPopupMenu>
+          </View>
           <TouchableOpacity
             style={bottomMenuStyles.iconCStl}
             onPress={() => this.map.animateToCurrentPosition()}
           >
             <Icon name="gps-fixed" size={20} color="#fff" />
-            <Text style={bottomMenuStyles.textStl}>Ma position</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -230,12 +228,6 @@ const bottomMenuStyles = {
     marginLeft: 16,
     color: '#fff',
     fontSize: 16
-  },
-  pickerStl: {
-    flex: 1,
-    color: '#fff',
-    marginRight: 16,
-    backgroundColor: '#00AA8D',
   }
 }
 
