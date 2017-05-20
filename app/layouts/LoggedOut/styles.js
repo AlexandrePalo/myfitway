@@ -1,6 +1,7 @@
 const styles = {
   containerStl: {
-    flex: 1
+    flex: 1,
+    marginTop: 20
   }
 }
 

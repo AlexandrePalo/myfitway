@@ -15,10 +15,10 @@ class Login extends Component {
           <Input placeholder="Mot de passe" value="" onChangeText={text => console.log(text)} secureTextEntry onSubmitEditing={() => console.log('press')} />
 
           <View style={styles.signInResetWrapper}>
-            <MButton onPress={() => console.log('reset')} textStyle={styles.resetBtnStl}>
+            <MButton onPress={() => this.props.navigation.navigate('resetPassword')} textStyle={styles.resetBtnStl}>
               <Text>Mot de passe oublié ?</Text>
             </MButton>
-            <MButton onPress={() => console.log('new')} textStyle={styles.signInBtnStl}>
+            <MButton onPress={() => this.props.navigation.navigate('newMember')} textStyle={styles.signInBtnStl}>
               <Text>Pas encore membre ?</Text>
             </MButton>
           </View>

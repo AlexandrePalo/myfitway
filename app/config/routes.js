@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
-import { Login } from '../routes'
+import { Login, ResetPassword, NewMember } from '../routes'
 import { LoggedOut } from '../layouts'
 
 const LoggedOutNavigator = StackNavigator({
-  login: { screen: Login }
+  login: { screen: Login, navigationOptions: { title: 'Login' } },
+  resetPassword: { screen: ResetPassword, navigationOptions: { title: 'Réinitialiser mon mot de passe' } },
+  newMember: { screen: NewMember, navigationOptions: { title: 'Créer un nouveau compte' } }
 })
 
 class Router extends Component {
