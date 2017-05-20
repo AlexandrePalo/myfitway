@@ -4,7 +4,7 @@ import { Entypo } from '@expo/vector-icons'
 import { DrawerSection, DrawerLink } from '../../components'
 import { styles } from './styles'
 
-const Drawer = () => (
+const Drawer = props => (
   <View style={styles.containerStl}>
     <View style={styles.headerContainerStl}>
       <View style={styles.logoSubtitleContainerStl}>
@@ -19,7 +19,7 @@ const Drawer = () => (
 
     <View style={styles.menuContainerStl}>
       <DrawerSection>
-        <DrawerLink title="Tracks" icon="swap-calls" onPress={() => console.log('tracks')} />
+        <DrawerLink title="Derniers tracés" icon="swap-calls" onPress={() => props.navigation.navigate('tracks')} />
         <DrawerLink title="Tracer" icon="layers" onPress={() => console.log('tracer')} />
       </DrawerSection>
       <DrawerSection>
