@@ -5,7 +5,7 @@ import { styles } from './styles'
 class LoggedOut extends Component {
   render() {
     return (
-      <View>
+      <View style={styles.containerStl}>
         {this.props.children}
       </View>
     )

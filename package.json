@@ -13,12 +13,11 @@
     "lodash": "^4.17.4",
     "mathjs": "^3.11.1",
     "moment": "^2.18.1",
-    "react": "^15.4.2",
+    "react": "~15.4.2",
     "react-apollo": "^1.0.0",
-    "react-native": "^0.42.3",
+    "react-native": "github:exponent/react-native#sdk-15.0.0",
     "react-native-chooser": "^1.5.0",
     "react-native-drawer": "^2.3.0",
-    "react-native-maps": "^0.14.0",
     "react-native-material-kit": "^0.4.1",
     "react-native-md-textinput": "^2.0.4",
     "react-native-pathjs-charts": "0.0.26",
@@ -29,7 +28,9 @@
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "@expo/vector-icons": "~4.0.0",
+    "expo": "~15.0.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
@@ -41,5 +42,6 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "main": "main.js"
 }

@@ -1,6 +1,5 @@
 const styles = {
   containerStl: {
-    paddingTop: 56,
     backgroundColor: '#f5f5f5',
     flex: 1
   },

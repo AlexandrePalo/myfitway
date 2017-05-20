@@ -12,7 +12,7 @@ class Login extends Component {
             MyFitWay
           </Text>
           <Input placeholder="Email" value="" onChangeText={text => console.log(text)} autoFocus keyboardType="email-address" />
-          <Input placeholder="Mot de passe" value="" onChangeText={text => console.log(text)} secureTextEntry onSubmitEditing={this.onButtonPress.bind(this)} />
+          <Input placeholder="Mot de passe" value="" onChangeText={text => console.log(text)} secureTextEntry onSubmitEditing={() => console.log('press')} />
 
           <View style={styles.signInResetWrapper}>
             <MButton onPress={() => console.log('reset')} textStyle={styles.resetBtnStl}>
@@ -22,7 +22,7 @@ class Login extends Component {
               <Text>Pas encore membre ?</Text>
             </MButton>
           </View>
-          <MButtonRaised onPress={this.onButtonPress.bind(this)}>
+          <MButtonRaised onPress={() => console.log('press')}>
             <Text>Connexion</Text>
           </MButtonRaised>
         </Card>
