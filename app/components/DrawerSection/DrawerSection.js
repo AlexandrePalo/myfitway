@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { styles } from './styles'
 
-const Section = ({ children }) => {
+const DrawerSection = ({ children }) => {
   return (
     <View style={styles.containerStl}>
       {children}
@@ -10,4 +10,4 @@ const Section = ({ children }) => {
   )
 }
 
-export { Section }
+export { DrawerSection }

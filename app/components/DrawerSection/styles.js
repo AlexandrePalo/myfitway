@@ -3,7 +3,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     elevation: 1,
-    marginTop: 3,
+    marginTop: 1,
     position: 'relative',
     backgroundColor: '#FAFAFA',
     shadowColor: '#000',

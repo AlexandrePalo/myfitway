@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Login, ResetPassword, NewMember, Sample } from '../routes'
-import { LoggedOut, LoggedIn } from '../layouts'
+import { LoggedOut, LoggedIn, Drawer } from '../layouts'
 
 const LoggedOutNavigator = StackNavigator({
   login: { screen: Login, navigationOptions: { title: 'Login' } },
@@ -25,9 +25,16 @@ const SampleNavigation = StackNavigator({
   }
 })
 
-const LoggedInNavigator = DrawerNavigator({
-  sampleC: { screen: SampleNavigation }
-})
+const LoggedInNavigator = DrawerNavigator(
+  {
+    sampleC: { screen: SampleNavigation }
+  },
+  {
+    initialRouteName: 'sampleC',
+    drawerPosition: 'left',
+    contentComponent: props => <Drawer {...props} />
+  }
+)
 
 class Router extends Component {
   render() {
