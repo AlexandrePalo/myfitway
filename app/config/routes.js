@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import { MaterialIcons } from '@expo/vector-icons'
-import { Login, ResetPassword, NewMember, Sample } from '../routes'
+import { Login, ResetPassword, NewMember, LastTracks } from '../routes'
 import { LoggedOut, LoggedIn, Drawer } from '../layouts'
 
 const LoggedOutNavigator = StackNavigator({
@@ -11,11 +11,11 @@ const LoggedOutNavigator = StackNavigator({
   newMember: { screen: NewMember, navigationOptions: { title: 'Créer un nouveau compte' } }
 })
 
-const SampleNavigation = StackNavigator({
+const TracksNavigation = StackNavigator({
   sample: {
-    screen: Sample,
+    screen: LastTracks,
     navigationOptions: ({ navigation }) => ({
-      title: 'Sample',
+      title: 'Derniers tracés',
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
           <MaterialIcons name="menu" size={24} color="#000" />
@@ -27,10 +27,10 @@ const SampleNavigation = StackNavigator({
 
 const LoggedInNavigator = DrawerNavigator(
   {
-    sampleC: { screen: SampleNavigation }
+    tracks: { screen: TracksNavigation }
   },
   {
-    initialRouteName: 'sampleC',
+    initialRouteName: 'tracks',
     drawerPosition: 'left',
     contentComponent: props => <Drawer {...props} />
   }
