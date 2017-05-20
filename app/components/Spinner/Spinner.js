@@ -11,4 +11,3 @@ const Spinner = ({ size }) => {
 }
 
 export { Spinner }
-export * from './Spinner'
