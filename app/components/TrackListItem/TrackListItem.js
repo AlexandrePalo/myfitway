@@ -14,7 +14,7 @@ const TrackListItem = props => {
       <View style={trackStl}>
         <Text style={titleTextStl}>{title}</Text>
         <View style={infoStl}>
-          <Text style={infoTextStl}>{distance}</Text>
+          <Text style={infoTextStl}>{distance} km</Text>
           <Text style={infoTextStl}>{place}</Text>
           <Text style={infoTextStl}>{date}</Text>
         </View>
