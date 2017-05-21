@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { gql, graphql } from 'react-apollo'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -17,7 +17,13 @@ class LastTracksUnlinked extends Component {
     }
     return (
       <View>
-        {this.props.data.allTracks.map(track => <TrackListItem key={track.id} title={track.name} distance={track.distance} place={track.place} date={moment(track.createdAt).format('DD/MM/YYYY')} description={track.description.length > 20 ? track.description.substring(0, 40) + '...' : track.description} />)}
+        {this.props.data.allTracks.map(track => {
+          return (
+            <TouchableOpacity key={track.id} onPress={() => this.props.navigation.navigate('trackDetails', { id: track.id, name: track.name })}>
+              <TrackListItem key={track.id} title={track.name} distance={track.distance} place={track.place} date={moment(track.createdAt).format('DD/MM/YYYY')} description={track.description.length > 20 ? track.description.substring(0, 40) + '...' : track.description} />
+            </TouchableOpacity>
+          )
+        })}
       </View>
     )
   }

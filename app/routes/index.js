@@ -7,3 +7,4 @@ export * from './NewMember'
 export * from './Sample'
 // Tracks Navigator
 export * from './LastTracks'
+export * from './TrackDetails'
