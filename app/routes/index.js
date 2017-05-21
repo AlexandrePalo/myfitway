@@ -8,3 +8,5 @@ export * from './Sample'
 // Tracks Navigator
 export * from './LastTracks'
 export * from './TrackDetails'
+// Tracer Navigator
+export * from './TracerMap'

@@ -20,7 +20,7 @@ const Drawer = props => (
     <View style={styles.menuContainerStl}>
       <DrawerSection>
         <DrawerLink title="Derniers tracés" icon="swap-calls" onPress={() => props.navigation.navigate('tracks')} />
-        <DrawerLink title="Tracer" icon="layers" onPress={() => console.log('tracer')} />
+        <DrawerLink title="Suivi de parcours" icon="layers" onPress={() => props.navigation.navigate('tracer')} />
       </DrawerSection>
       <DrawerSection>
         <DrawerLink title="Paramètres" icon="settings" onPress={() => console.log('parameters')} />

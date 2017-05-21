@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import { MaterialIcons } from '@expo/vector-icons'
-import { Login, ResetPassword, NewMember, LastTracks, TrackDetails } from '../routes'
+import { Login, ResetPassword, NewMember, LastTracks, TrackDetails, TracerMap } from '../routes'
 import { LoggedOut, LoggedIn, Drawer } from '../layouts'
 import { styles } from './styles'
 
@@ -12,7 +12,7 @@ const LoggedOutNavigator = StackNavigator({
   newMember: { screen: NewMember, navigationOptions: { title: 'Créer un nouveau compte' } }
 })
 
-const TracksNavigation = StackNavigator({
+const TracksNavigator = StackNavigator({
   lastTracks: {
     screen: LastTracks,
     navigationOptions: ({ navigation }) => ({
@@ -30,9 +30,24 @@ const TracksNavigation = StackNavigator({
   }
 })
 
+const TracerNavigator = StackNavigator({
+  tracerMap: {
+    screen: TracerMap,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Enregistrement',
+      headerLeft: (
+        <TouchableOpacity style={styles.headerLeftStl} onPress={() => navigation.navigate('DrawerOpen')}>
+          <MaterialIcons name="menu" size={24} color="#000" />
+        </TouchableOpacity>
+      )
+    })
+  }
+})
+
 const LoggedInNavigator = DrawerNavigator(
   {
-    tracks: { screen: TracksNavigation }
+    tracks: { screen: TracksNavigator },
+    tracer: { screen: TracerNavigator }
   },
   {
     initialRouteName: 'tracks',
