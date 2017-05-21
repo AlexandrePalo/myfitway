@@ -44,6 +44,10 @@ const styles = {
     marginTop: 5,
     alignSelf: 'center',
     textAlign: 'justify'
+  },
+  mapContainerStl: {
+    height: 400,
+    margin: 16
   }
 }
 
