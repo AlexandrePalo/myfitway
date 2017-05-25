@@ -1,32 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Location, Permissions, MapView } from 'expo'
+import { View, Text, TouchableOpacity, Picker } from 'react-native'
 import { connect } from 'react-redux'
 import { MaterialIcons } from '@expo/vector-icons'
-import { Spinner, Card, MButtonRaised } from '../../components'
+import { Card, MButtonRaised, RecordingMap } from '../../components'
 import { styles } from './styles'
 import { startTimer, stopTimer, resetTimer } from '../../actions'
 
 class TracerMapUnlinked extends Component {
   state = {
-    errorMessage: null,
-    location: null
-  }
-
-  componentWillMount() {
-    this.getLocationAsync()
-  }
-
-  getLocationAsync = async () => {
-    const { status } = await Permissions.askAsync(Permissions.LOCATION)
-    if (status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access location was denied'
-      })
-    }
-
-    const location = await Location.getCurrentPositionAsync({})
-    this.setState({ location })
+    mapType: 'standard'
   }
 
   renderTimerButton() {
@@ -58,32 +40,10 @@ class TracerMapUnlinked extends Component {
   }
 
   render() {
-    if (this.state.errorMessage) {
-      return (
-        <View style={styles.containerStl}>
-          <Text>{this.state.errorMessage}</Text>
-        </View>
-      )
-    }
-    if (!this.state.location) {
-      return (
-        <View style={styles.containerStl}>
-          <Spinner size="large" />
-        </View>
-      )
-    }
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.containerStl}>
-          <MapView
-            initialRegion={{
-              latitude: this.state.location.coords.latitude,
-              longitude: this.state.location.coords.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421
-            }}
-            style={styles.mapStl}
-          />
+          <RecordingMap mapType={this.state.mapType} onRef={ref => (this.map = ref)} />
         </View>
         <View style={styles.containerCardStl}>
           <Card>
@@ -108,6 +68,20 @@ class TracerMapUnlinked extends Component {
             </View>
             {this.renderTimerButton()}
           </Card>
+        </View>
+        <View style={styles.bottomMenuContainerStl}>
+          <View style={styles.bottomMenuIconCStlSpecial}>
+            <MaterialIcons name="layers" size={20} style={styles.bottomMenuIconStl} />
+            <Picker selectedValue={this.state.mapType} style={{ flex: 1, color: '#000', opacity: 0.54 }} onValueChange={mapType => this.setState({ mapType })}>
+              <Picker.Item label="Google Maps" value="standard" />
+              <Picker.Item label="Satellite" value="satellite" />
+              <Picker.Item label="Hybride" value="hybrid" />
+              <Picker.Item label="OpenStreetMap" value="openstreetmap" />
+            </Picker>
+          </View>
+          <TouchableOpacity style={styles.bottomMenuIconCStl} onPress={() => this.map.animateToCurrentPosition()}>
+            <MaterialIcons name="gps-fixed" size={20} style={styles.bottomMenuIconStl} />
+          </TouchableOpacity>
         </View>
       </View>
     )

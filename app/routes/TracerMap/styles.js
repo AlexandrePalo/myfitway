@@ -56,6 +56,39 @@ const styles = {
   flex2BtnR: {
     flex: 2,
     marginLeft: 3
+  },
+  bottomMenuContainerStl: {
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    position: 'absolute',
+    height: 50,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  bottomMenuIconCStl: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  bottomMenuIconCStlSpecial: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: 16
+  },
+  bottomMenuIconStl: {
+    color: '#000',
+    opacity: 0.54
+  },
+  bottomMenuTextStl: {
+    marginLeft: 16,
+    color: '#fff',
+    fontSize: 16
   }
 }
 
