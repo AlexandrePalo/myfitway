@@ -50,7 +50,7 @@ const LoggedInNavigator = DrawerNavigator(
     tracer: { screen: TracerNavigator }
   },
   {
-    initialRouteName: 'tracks',
+    initialRouteName: 'tracer',
     drawerPosition: 'left',
     contentComponent: props => <Drawer {...props} />
   }

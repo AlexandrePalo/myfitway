@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { ApolloClient, createNetworkInterface } from 'react-apollo'
+import tracer from './tracer'
 
 export const client = new ApolloClient({
   networkInterface: createNetworkInterface({
@@ -8,5 +9,6 @@ export const client = new ApolloClient({
 })
 
 export default combineReducers({
-  apollo: client.reducer()
+  apollo: client.reducer(),
+  tracer
 })

@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 6708,
+  "expoServerNgrokUrl": "https://33-qm4.apalo.myfitway.exp.direct",
+  "packagerNgrokUrl": "https://packager.33-qm4.apalo.myfitway.exp.direct",
+  "ngrokPid": 7952
 }
